@@ -4,35 +4,28 @@ var Schema = mongoose.Schema;
 
 
 var Notification = Schema({
-  type: Number,
+  type: String,
   notificationConfig: Schema.Types.Mixed
-});
-var Configure = Schema({
-  notifications: [Notification],
-  type: Number,
-  config: Schema.Types.Mixed,
-  timeout: Number,
-  cronTab: String,
-  isSendData: Boolean,
-  sendData: String,
-  checkResponse: Boolean,
-  regexpCheck: String
 });
 var Check = Schema({
   name: String,
   description: String,
-  configure: Configure,
-  totalRun: Number,
-  succRun: Number
+  type:String,
+  config:Schema.Types.Mixed,
+  timeout:Number,
+  interval:Number,
+  notifications:[Notification],
+  lastPass:Boolean,
+  lastFail:Date,
+  createDate:Date
 });
 
 
 var Run = Schema({
   checkId: String,
-  checkType: Number,
-  runDate: Date,
+  checkObj: Object,
+  startDate: Date,
   endDate: Date,
-  elapsedTime: Number,
   response: String,
   isSuccessful: Boolean,
   failReason: String
@@ -53,12 +46,13 @@ var HTTPConfig=Schema({
   url:String,
   method:String,
   headers:Object,
-  auth:String
+  auth:String,
+  body:String,
+  regexpCheck:String
 });
 
 module.exports={
   Notification:Notification,
-  Configure:Configure,
   Check:Check,
   Run:Run,
   TCPConfig:TCPConfig,

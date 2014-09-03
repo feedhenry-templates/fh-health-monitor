@@ -1,0 +1,30 @@
+[
+  {
+    "_id":"111",
+    "name": "check1",
+    "description": "description  of check1",
+    "type": "http",
+    "config": {
+      "url": "https://feedhenry.com"
+    },
+    "timeout": 30,
+    "interval":2,
+    "notifications": [],
+    "lastPass": true,
+    "lastFail": "Tue Sep 02 2013 15:10:48 GMT+0100 (IST)"
+  },
+  {
+    "_id":"112",
+    "name": "Aerlingus User Authentication",
+    "description": "Live check of aerlingus user authentication gateway.",
+    "type": "http",
+    "config": {
+      "url": "https://feedhenry.com"
+    },
+    "timeout": 30,
+    "interval":5,
+    "notifications": [],
+    "lastPass": false,
+    "lastFail": "Tue Sep 02 2014 15:10:48 GMT+0100 (IST)"
+  }
+]

@@ -3,15 +3,97 @@
 <html>
 
 <head>
+<link rel="stylesheet" href="./css/nprogress.css"/>
 <link rel="stylesheet" href="./css/bootstrap.min.css"/>
+<link rel="stylesheet" href="./css/style.css"/>
 <script type="application/javascript" src="./js/jquery.1.11.1.min.js"></script>
 <script type="application/javascript" src="./js/bootstrap.min.js"></script>
 <script type="application/javascript" src="./js/underscore-min.js"></script>
 <script type="application/javascript" src="./js/backbone-min.js"></script>
+<script type="application/javascript" src="./js/nprogress.js"></script>
+
+
+<!-- Development Application scripts -->
+<script type="application/javascript" src="./app/app.js"></script>
+<script type="application/javascript" src="./app/route.js"></script>
+<script type="application/javascript" src="./app/msg.js"></script>
+<script type="application/javascript" src="./app/template.js"></script>
+
+<!--models -->
+<script type="application/javascript" src="./app/models/check.js"></script>
+
+<!--collections -->
+<script type="application/javascript" src="./app/collections/checks.js"></script>
+
+<!-- Views -->
+<script type="application/javascript" src="./app/views/checkList.js"></script>
+<script type="application/javascript" src="./app/views/check.js"></script>
+<script type="application/javascript" src="./app/views/createCheck.js"></script>
+<script type="application/javascript" src="./app/views/editCheck.js"></script>
+
+
+<script>
+$(function(){
+  app.init(function(){});
+});
+</script>
 </head>
 
 <body>
-<h1>Hello</h1>
+<div id="header" class="clearfix">
+  <div class="title pull-left">Monitoring</div>
+  <div class="pull-right"><a href="#create" class="btn btn-primary">Add New</a></div>
+</div>
+<div id="body">
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade check_modal" id="create_check_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+    </div>
+  </div>
+</div>
+
+<div class="modal fade check_modal" id="edit_check_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+    </div>
+  </div>
+</div>
 </body>
 
+
+<!-- templates -->
+<script type="text/template" id="tmpl_monitorlist_row">
+      <div class="col_checkbox"><input type="checkbox" data-id="<%= _id %>"/> </div>
+      <div class="col_updown"><span class="<%= statusCls %>" > </span> </div>
+      <div class="col_checkname"><div class="checkname"><%=name %> </div> <div class="description"><%= description %> </div> </div>
+      <div class="col_checktype"><%= type.toUpperCase() %> </div>
+      <div class="col_checkuptime">N/A </div>
+      <div class="col_tool">
+        <span class="check_run glyphicon glyphicon-play" title="Run the check"></span> 
+        <span class="check_remove glyphicon glyphicon-remove-sign" title="Remove"></span> 
+        <a class=" glyphicon glyphicon-pencil" title="Edit" href="#edit/<%= _id %>"></a> 
+        <span class="check_details glyphicon glyphicon-list-alt" title="Details"></span> 
+       
+      </div>
+</script>
+
+
+<script type="text/template" id="tmpl_monitorlist">
+  <div id="monitorlist">
+    <ul>
+      <li id="monitorlist_head" class="clearfix">
+        <div class="col_checkbox"><input type="checkbox" id="checkAll"/> </div>
+        <div class="col_updown">STATUS</div>
+        <div class="col_checkname">NAME</div>
+        <div class="col_checktype">TYPE</div>
+        <div class="col_checkuptime">UP SINCE</div>
+        <div class="col_tool">ACTIONS</div>
+      </li>
+    </ul>
+  </div>
+</script>
 </html>
