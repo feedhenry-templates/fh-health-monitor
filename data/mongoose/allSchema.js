@@ -12,12 +12,16 @@ var Check = Schema({
   description: String,
   type:String,
   config:Schema.Types.Mixed,
-  timeout:Number,
-  interval:Number,
+  timeout:Number, // second
+  interval:Number, //min 
   notifications:[Notification],
+  lastRun:Date,
   lastPass:Boolean,
   lastFail:Date,
-  createDate:Date
+  createDate:Date,
+  status:Number, // 0 - normal, 1 - paused
+  totalRun:Number,
+  passedRun:Number
 });
 
 

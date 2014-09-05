@@ -5,7 +5,11 @@ body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
 }
-
+ul{
+  margin:0;
+  padding:0;
+  list-style:none;
+}
 .hidden{
   display:none;
 }
@@ -21,8 +25,9 @@ body {
 #monitorlist ul{
   list-style:none;
   margin:0;
-  width:1000px;
+  width:1400px;
   margin:0 auto;
+  padding:0;
 }
 #monitorlist ul li{
   padding-top:8px;
@@ -92,4 +97,10 @@ body {
 }
 .check_modal #config_panel{
   padding:15px;
+}
+#run_list li{
+  padding:10px;
+}
+#run_list li:nth-child(even){
+  background:#dfdfdf;
 }

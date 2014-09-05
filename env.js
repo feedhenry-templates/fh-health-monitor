@@ -3,7 +3,9 @@ exports.set=set;
 
 var sysEnv=process.env;
 var hardCoded={
-  "staticFolder":__dirname+"/client/"
+  "staticFolder":__dirname+"/client/",
+  "TIMER_INTERVAL":10
+
 }
 var dynamic={
 

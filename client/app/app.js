@@ -58,5 +58,6 @@ var app = (function(module) {
   views: {},
   models: {},
   collections: {},
-  router: {}
+  router: {},
+  collectionCls:{}
 });

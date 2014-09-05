@@ -7,6 +7,7 @@ var express = require("express");
 var models = require("../../data/mongoose/allModel");
 var bodyParser = require("body-parser");
 var ObjectId = require("mongoose").Types.ObjectId;
+var checkMgr=require("../../libs/checkMgr");
 router.use(bodyParser.urlencoded());
 router.use(bodyParser.json());
 
@@ -22,6 +23,7 @@ router.post("/", function(req, res) {
   var CheckModel = models["Check"];
   var model = new CheckModel(req.body);
   model.createDate=new Date();
+  model.status=0;
   model.save(function(err, m) {
     if (err) {
       res.status(500).json({
@@ -68,6 +70,42 @@ router.put("/:id",function(req,res){
      }else{
        res.json(doc);
      }
+  });
+});
+//read a check
+router.get("/:id",function(req,res){
+  var id = req.params.id;
+  var CheckModel = models["Check"];
+  CheckModel.findById(new ObjectId(id), function(err, doc) {
+    if (err){
+      res.status(500).json({err:err});
+    }else{
+      res.json(doc);
+    } 
+  });
+});
+//run a check
+router.get("/:id/test",function(req,res){
+  var id = req.params.id;
+  checkMgr.run(id,function(err){
+    if (err){
+      res.json({err:err});
+    }else{
+      res.json({});
+    }
+  });
+});
+
+//retrieve all runs
+router.get("/:id/runs",function(req,res){
+  var RunModel=models["Run"];
+  var checkId=req.params.id;
+  RunModel.find({checkId:checkId},null,{sort:{startDate:-1}},function(err,models){
+    if (err){
+      res.status(500).json({err:err.toString()});
+    }else{
+      res.json(models);
+    }
   });
 });
 module.exports = router;

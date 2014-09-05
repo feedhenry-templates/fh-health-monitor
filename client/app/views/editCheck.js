@@ -32,7 +32,7 @@
           _setFormField(form, "email_addresses", emailArr.join(", "));
         } else if (key == "type") {
           form.find("#btngroup_type input").removeAttr("checked");
-          form.find("#btngroup_type input[value="+type+"]").attr("checked","checked");
+          form.find("#btngroup_type input[value="+type+"]").prop("checked",true);
           form.find("#btngroup_type label").removeClass("active");
           form.find("#btngroup_type input[value="+type+"]").parent().addClass("active");
           this.$el.find("#config_panel>div").addClass("hidden");
@@ -43,6 +43,7 @@
       }
     },
     save:function(data,cb){
+      console.log(data);
      this.model.save(data,{
        "success":function(){
          cb();
