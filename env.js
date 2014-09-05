@@ -13,7 +13,7 @@ var dynamic={
 }
 
 function get(key,def){
-  return dynamic[key]?dynamic[key]:sysEnv[key]?sysEnv[env]:hardCoded[key]?hardCoded[key]:def;
+  return dynamic[key]?dynamic[key]:sysEnv[key]?sysEnv[key]:hardCoded[key]?hardCoded[key]:def;
 }
 
 
