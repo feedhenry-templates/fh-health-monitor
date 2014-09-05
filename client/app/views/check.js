@@ -15,8 +15,13 @@
         attr.statusCls = "glyphicon glyphicon-minus-sign status_unknown";
       }
       if (attr.totalRun) {
+        if (!attr.passedRun){
+          attr.passedRun=0;
+        }
         var f = Math.round((attr.passedRun / attr.totalRun) * 10000) / 100;
         attr.upRatio = f + "%";
+      }else{
+        attr.upRatio="N/A";
       }
       if (attr.lastFail && attr.lastPass===true) {
         var span = new Date() - new Date(attr.lastFail);
@@ -65,12 +70,18 @@
     },
     bindModel: function() {
       this.model.on("change", this.render.bind(this));
+      this.model.on("start_run",this.startRun.bind(this));
+      this.model.on("end_run",this.endRun.bind(this));
     },
     onClickRun: function() {
       var self = this;
-      this.model.run(function(err) {
-        self.model.fetch();
-      });
+      this.model.run();
+    },
+    startRun:function(){
+      this.$el.find(".check_run").addClass("running");
+    },
+    endRun:function(){
+      this.$el.find(".check_run").removeClass("running");
     }
   });
 })();

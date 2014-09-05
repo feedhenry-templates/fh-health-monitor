@@ -22,7 +22,7 @@
       var col = this.collection;
       col.on("add", this.addRowView.bind(this));
       col.on("remove", this.removeRowView.bind(this));
-      col.on("reset", this.reset.bind(this));
+      col.on("reset", this.empty.bind(this));
       col.on("sort", this.reset.bind(this));
     },
     addRowView:function(model){
@@ -37,6 +37,7 @@
 
     },
     reset:function(){
+      this.empty();
       this.collection.forEach(this.addRowView.bind(this));
       this.delegateEvents();
     },

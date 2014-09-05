@@ -58,6 +58,9 @@ ul{
 #monitorlist .col_checkuptime{
   width:100px;
 }
+#monitorlist .col_checkupratio{
+  width:100px;
+}
 #monitorlist .monitorlist_row .col_tool{
   font-size:1.5em;
 }
@@ -104,3 +107,11 @@ ul{
 #run_list li:nth-child(even){
   background:#dfdfdf;
 }
+#monitorlist .check_run.running{
+-webkit-animation:spin 4s linear infinite;
+    -moz-animation:spin 4s linear infinite;
+    animation:spin 4s linear infinite;
+}
+@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }

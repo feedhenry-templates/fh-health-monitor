@@ -1,17 +1,19 @@
 (function(){
   app.models.CheckModel=Backbone.Model.extend({
     idAttribute:"_id",
-    run:function(cb){
+    run:function(){
       var url=this.url()+"/test";
+      var self=this;
       $.ajax({
         url:url,
         success:function(){
-          cb();
+          self.trigger("end_run")
         },
         error:function(xhr,s,err){
-          cb(err);
+          self.trigger("end_run")
         }
       });
+      this.trigger("start_run");
     },
     initialize:function(){
       var self=this;

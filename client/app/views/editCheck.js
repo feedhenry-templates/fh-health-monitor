@@ -43,7 +43,6 @@
       }
     },
     save:function(data,cb){
-      console.log(data);
      this.model.save(data,{
        "success":function(){
          cb();
