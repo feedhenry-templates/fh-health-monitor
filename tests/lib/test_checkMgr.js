@@ -1,8 +1,8 @@
-var mgr=require("../../libs/checkMgr")
+var mgr=require("../../lib/checkMgr")
 
 describe("check manager",function(){
   before(function(done){
-    require("../../data/db/mongoose")(done);
+    require("../../lib/data/db/mongoose")(done);
   });
   it ("should respond on time call",function(done){
     mgr.onTimerCall();

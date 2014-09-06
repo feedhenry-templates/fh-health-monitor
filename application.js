@@ -3,10 +3,10 @@ var async = require("async");
 var initialised = false;
 log.info("System start to initialise");
 async.series([ //the order of components being initialised is important
-  require("./data/db/mongoose"),
-  require("./server/express"),
-  require("./libs/timer").init.bind(require("./libs/timer")),
-  require("./libs/checkMgr").init
+  require("./lib/data/db/mongoose"),
+  require("./lib/server/express"),
+  require("./lib/timer").init.bind(require("./lib/timer")),
+  require("./lib/checkMgr").init
 ], function(err) {
   if (!initialised) {
     initialised = true;
