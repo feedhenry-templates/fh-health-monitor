@@ -4,7 +4,7 @@ var env=require("../env");
 var cache = require("./cache/" + env.get("CACHE_TYPE", "mem"));
 var CheckModel = models["Check"];
 var log = require("../log");
-var Runner=require("./runner");
+var runner=require("./runner");
 function init(cb) {
   log.info("Check Manager subscribe to timer.");
   timer.onTime(onTimerCall);
@@ -86,8 +86,7 @@ function run(checkId,cb) {
       log.error(checkId);
       log.error(err);
     } else {
-      var runner = new Runner(check);
-      runner.run(cb);
+      runner.runCheck(check,cb);
     }
   });
 }

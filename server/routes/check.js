@@ -98,9 +98,12 @@ router.get("/:id/test",function(req,res){
 
 //retrieve all runs
 router.get("/:id/runs",function(req,res){
+  console.log(req.query);
   var RunModel=models["Run"];
   var checkId=req.params.id;
-  RunModel.find({checkId:checkId},null,{sort:{startDate:-1}},function(err,models){
+  var con=req.query;
+  con.checkId=checkId;
+  RunModel.find(con,{response:0,checkObj:0},{sort:{startDate:-1}},function(err,models){
     if (err){
       res.status(500).json({err:err.toString()});
     }else{

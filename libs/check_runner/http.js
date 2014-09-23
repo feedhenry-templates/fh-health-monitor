@@ -1,14 +1,7 @@
-var Run = require("./Run");
-var util = require("util");
 var request = require("request");
 
-function HttpRun() {
-  Run.call(this);
-}
-util.inherits(HttpRun, Run);
-HttpRun.prototype.onRun = function(cb) {
-  var params = this.getConfig();
-  var self = this;
+module.exports= function(check,runInst,cb) {
+  var params = check.config;
   request(params, function(err, im, body) {
     if (err) {
       cb(err, body);
@@ -17,7 +10,7 @@ HttpRun.prototype.onRun = function(cb) {
         "headers": im.headers,
         "body": body
       }));
-    } else if (!self.regexpCheck(body)) {
+    } else if (!regexpCheck(params.regexpCheck,body)) {
       cb("Regular expression check failed. Regexp:" + params.regexpCheck, JSON.stringify({
         "headers": im.headers,
         "body": body
@@ -31,8 +24,7 @@ HttpRun.prototype.onRun = function(cb) {
   });
 }
 
-HttpRun.prototype.regexpCheck = function(body) {
-  var regexpStr = this.getConfig().regexpCheck;
+function regexpCheck (regexpStr,body) {
   if (!regexpStr || regexpStr == "") {
     return true;
   }
@@ -41,5 +33,3 @@ HttpRun.prototype.regexpCheck = function(body) {
 }
 
 
-var c = new HttpRun()
-c.bootstrap();

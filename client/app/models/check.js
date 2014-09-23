@@ -14,6 +14,10 @@
         }
       });
       this.trigger("start_run");
+      var self=this;
+      this.once("end_run",function(){
+        self.fetch();
+      })
     },
     initialize:function(){
       var self=this;

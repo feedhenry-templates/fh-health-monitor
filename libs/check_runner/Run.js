@@ -1,136 +1,127 @@
-module.exports = Run;
 var models = require("../../data/mongoose/allModel");
 var CheckModel = models["Check"];
 var RunModel = models["Run"]
 var ObjectId = require("mongoose").Types.ObjectId;
 var log = require("../../log");
-
-function Run() {
-  this.checkId = process.argv[2];
-  this.finished = false;
-  log.info("Checkid is:" + this.checkId);
-}
-Run.prototype.init = function(cb) {
+var finished=false;
+bootstrap(process.argv[2]);
+function _init(cb) {
   require("../../data/db/mongoose")(cb);
 }
-Run.prototype.loadCheck = function(cb) {
-  CheckModel.findById(new ObjectId(this.checkId), cb);
+
+function loadCheck(checkId, cb) {
+  CheckModel.findById(new ObjectId(checkId), cb);
 }
-Run.prototype.getConfig = function() {
-  return this.check.config;
-}
-Run.prototype.beforeRun = function(cb) {
-  var self = this;
-  this.loadCheck(function(err, check) {
+
+
+function beforeRun(checkId, cb) {
+  loadCheck(checkId, function(err, check) {
     if (err) {
       cb(err);
     } else {
-      self.check = check;
-      self.initCheck();
-      self.runInst = new RunModel({
-        checkId: self.checkId,
+      if (!check.totalRun) {
+        check.totalRun = 0;
+      }
+      check.totalRun += 1;
+      check.lastRun = new Date();
+      var runInst = new RunModel({
+        checkId: checkId,
         checkObj: check,
         startDate: new Date()
       });
-      cb();
+      cb(null, check, runInst);
     }
   });
 }
 
-Run.prototype.onRun = function(cb) {
-  throw ("not implemented");
+function onRun(check,runInst,cb) {
+  var type=check.type;
+  require(__dirname+"/"+type+".js")(check,runInst,cb);
 }
-Run.prototype.afterRun = function(cb) {
-  if (this.finished) {
+
+function afterRun(check,runInst,cb) {
+  if (finished) {
     //TODO some log 
     return cb();
   }
-  this.finished = true;
-  this.runInst.endDate = new Date();
-  var self = this;
-  this.check.save(function(err, m) {
-    self.runInst.save(cb);
+  finished = true;
+  runInst.endDate = new Date();
+  check.save(function(err, m) {
+    runInst.save(cb);
   });
 }
-Run.prototype.initCheck = function() {
-  var check = this.check;
-  if (!check.totalRun) {
-    check.totalRun = 0;
-  }
-  check.totalRun += 1;
-  check.lastRun = new Date();
-}
-Run.prototype.failCheck = function() {
-  var check = this.check;
-  check.lastPass = false;
-  check.lastFail = new Date();
+
+
+function failCheck() {
   //TODO add notification
 }
-Run.prototype.sucCheck = function() {
-  var check = this.check;
-  check.lastPass = true;
-  if (!check.passedRun){
-    check.passedRun=0;
-  }
-  check.passedRun += 1;
 
-}
-Run.prototype.bootstrap = function() {
-  var self = this;
 
-  this.init(function(err) {
+function bootstrap(checkId) {
+  //init db connection
+  _init(function(err) {
     if (err) {
       log.error("Initilise failed.");
       log.error(err.toString());
-      self.terminate(1);
+      terminate(1);
     }
-    log.info("Start to run for check:" + self.checkId);
-    self.beforeRun(function(err) {
+    log.info("Start to run for check:" + checkId);
+    //before run init script
+    beforeRun(checkId,function(err, check, runInst) {
       if (err) {
         log.error("Bootstrap a check running failed.");
         log.error(err);
-        self.terminate(1);
+        terminate(1);
       } else {
         function _afterRunCb(err) {
 
           if (err) {
             log.error("After run failed.");
             log.error(err);
-            self.terminate(1);
+            terminate(1);
           } else {
-            log.info("Running finished for check: " + self.checkId);
-            self.terminate(0);
+            log.info("Running finished for check: " + checkId);
+            terminate(0);
           }
         }
         var timer = setTimeout(function() {
-          log.error("Timeout to run check:" + self.checkId);
-          self.runInst.isSuccessful = false;
-          self.runInst.failReason = "Execution timeout.";
-          self.failCheck();
-          self.afterRun(_afterRunCb);
-        }, self.check.timeout * 1000);
+          log.error("Timeout to run check:" + checkId);
+          runInst.isSuccessful = false;
+          runInst.failReason = "Execution timeout.";
+          check.lastPass = false;
+          check.lastFail = new Date();
+          failCheck();
+          afterRun(check,runInst,_afterRunCb);
+        }, check.timeout * 1000);
         //todo add timeout check
-        self.onRun(function(err, res) {
+        onRun(check,runInst,function(err, res) {
           clearTimeout(timer);
           if (err) {
             log.error("Running check failed.");
             log.error(err.toString());
-            self.runInst.isSuccessful = false;
-            self.runInst.failReason = err.toString();
-            self.runInst.response = res?res.toString():"";
-            self.failCheck();
+            runInst.isSuccessful = false;
+            runInst.failReason = err.toString();
+            runInst.response = res ? res.toString() : "";
+            check.lastPass = false;
+            check.lastFail = new Date();
+            failCheck();
           } else {
             log.info("Running check succeed.");
-            self.runInst.isSuccessful = true;
-            self.runInst.response = res.toString();
-            self.sucCheck();
+            runInst.isSuccessful = true;
+            runInst.response = res.toString();
+            if (!check.passedRun) {
+              check.passedRun = 0;
+            }
+            check.passedRun += 1;
+            check.lastPass=true;
           }
-          self.afterRun(_afterRunCb);
+          afterRun(check,runInst,_afterRunCb);
         });
       }
     });
   });
 }
-Run.prototype.terminate = function(exitCode) {
+
+function terminate(exitCode) {
   process.exit(exitCode);
 }

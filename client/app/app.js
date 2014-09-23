@@ -6,15 +6,35 @@ var app = (function(module) {
     NProgress.start();
     _initCollections(function() {
       NProgress.inc();
-      _initViews(function() {
+      _loadAllTemplates(function() {
         NProgress.inc();
-        if (initErrs.length > 0) {
-          app.msg.alert(initErrs.join(", "));
-        }
-        Backbone.history.start();
-        NProgress.done();
-        cb();
+        _initViews(function() {
+          NProgress.inc();
+          if (initErrs.length > 0) {
+            app.msg.alert(initErrs.join(", "));
+          }
+          Backbone.history.start();
+          NProgress.done();
+          cb();
+        });
       })
+    });
+  }
+
+  function _loadAllTemplates(cb) {
+    var path = "./templates/";
+    var tags = $('script[type="text/template"]');
+    var count = tags.length;
+    _.each(tags, function(item) {
+      var id = $(item).attr("id");
+      var fullPath = path + id + ".html";
+      $.get(fullPath, function(data) {
+        $(item).text(data);
+        count--;
+        if (count == 0) {
+          cb();
+        }
+      });
     });
   }
 
@@ -44,11 +64,10 @@ var app = (function(module) {
 
   function _initViews(cb) {
     app.views.checkListView = new app.ViewCls.CheckListView();
-    app.views.createCheck=new app.ViewCls.CreateCheckModal();
-    app.views.editCheck=new app.ViewCls.EditCheckModal();
+    app.views.createCheck = new app.ViewCls.CreateCheckModal();
+    app.views.editCheck = new app.ViewCls.EditCheckModal();
     //init home page -- check list view
     app.views.checkListView.render();
-    $("#body").html(app.views.checkListView.$el);
     cb();
   }
 
@@ -59,5 +78,5 @@ var app = (function(module) {
   models: {},
   collections: {},
   router: {},
-  collectionCls:{}
+  collectionCls: {}
 });

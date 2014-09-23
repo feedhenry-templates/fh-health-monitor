@@ -18,6 +18,7 @@
 <script type="application/javascript" src="./app/route.js"></script>
 <script type="application/javascript" src="./app/msg.js"></script>
 <script type="application/javascript" src="./app/template.js"></script>
+<script type="application/javascript" src="./app/body.js"></script>
 
 <!--models -->
 <script type="application/javascript" src="./app/models/check.js"></script>
@@ -32,8 +33,8 @@
 <script type="application/javascript" src="./app/views/check.js"></script>
 <script type="application/javascript" src="./app/views/createCheck.js"></script>
 <script type="application/javascript" src="./app/views/editCheck.js"></script>
-<script type="application/javascript" src="./app/views/listRun.js"></script>
-<script type="application/javascript" src="./app/views/run.js"></script>
+<script type="application/javascript" src="./app/views/runTable.js"></script>
+<script type="application/javascript" src="./app/views/runrow.js"></script>
 
 
 <script>
@@ -69,78 +70,10 @@ $(function(){
 
 
 <!-- templates -->
-<script type="text/template" id="tmpl_monitorlist_row">
-      <div class="col_checkbox"><input type="checkbox" data-id="<%= _id %>"/> </div>
-      <div class="col_updown"><span class="<%= statusCls %>" > </span> </div>
-      <div class="col_checkname"><div class="checkname"><%=name %> </div> <div class="description"><%= description %> </div> </div>
-      <div class="col_checktype"><%= type.toUpperCase() %> </div>
-      <div class="col_checkuptime"><%= upSince %> </div>
-      <div class="col_checkupratio"><%=upRatio %> </div>
-      <div class="col_tool">
-        <span class="check_run  glyphicon glyphicon-play disabled" title="Run the check"></span> 
-        <span class="check_remove glyphicon glyphicon-remove-sign" title="Remove"></span> 
-        <a class=" glyphicon glyphicon-pencil" title="Edit" href="#edit/<%= _id %>"></a> 
-        <a class="check_details glyphicon glyphicon-list-alt" title="Details" href="#detail/<%= _id %>"></a> 
-       
-      </div>
-</script>
-
-
-<script type="text/template" id="tmpl_monitorlist">
-  <div id="monitorlist">
-    <ul>
-      <li id="monitorlist_head" class="clearfix">
-        <div class="col_checkbox"><input type="checkbox" id="checkAll"/> </div>
-        <div class="col_updown">STATUS</div>
-        <div class="col_checkname">NAME</div>
-        <div class="col_checktype">TYPE</div>
-        <div class="col_checkuptime">UP SINCE</div>
-        <div class="col_checkupratio">UP RATIO</div>
-        <div class="col_tool">ACTIONS</div>
-      </li>
-    </ul>
-  </div>
-</script>
-<script type="text/template" id="tmpl_runlist">
-<div class="modal fade check_modal" id="list_run_modal" data-show="false" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-<div class="modal-header">
-  <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
-  </button>
-  <h4 class="modal-title" id="create_check_title">Check Run Result</h4>
-</div>
-<ul id="run_list">
-</ul>
-<div class="modal-footer">
-  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-</div>
-    </div>
-  </div>
-</div>
-</script>
-<script type="text/template" id="tmpl_run">
-<div>
-<b><label>Result:</label></b>
-<span class="label label-<%= isSuccessful?"success":"danger" %>"><%= isSuccessful?"Passed":"Failed" %> </span>
-</div>
-<div>
-<b><label>Fail Reason: </label><%= typeof (failReason)!="undefined"?failReason:"N/A" %></b>
-</div>
-<div>
-<b>Start Date: </b><%= startDate %>
-</div>
-<div>
-<b>End Date: </b><%= endDate %>
-</div>
-<div class="form-group">
-  <label>Response</label>
-  <textarea class="form-control"><%= typeof response=="undefined"?"N/A":response %></textarea>
-</div>
-<div class="form-group">
-  <label>Check</label>
-  <textarea class="form-control"><%= JSON.stringify(checkObj) %></textarea>
-</div>
-</script>
+<script type="text/template" id="tmpl_monitorlist_row"> </script>
+<script type="text/template" id="tmpl_monitorlist"> </script>
+<script type="text/template" id="tmpl_runlist"> </script>
+<script type="text/template" id="tmpl_run_row"> </script>
+<script type="text/template" id="tmpl_run"> </script>
 </body>
 </html>

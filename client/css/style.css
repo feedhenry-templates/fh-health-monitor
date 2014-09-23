@@ -10,6 +10,16 @@ ul{
   padding:0;
   list-style:none;
 }
+#body{
+  position:relative;
+}
+.page{
+  position:absolute;
+  top:0;
+  bottom:0;
+  left:0;
+  right:0;
+}
 .hidden{
   display:none;
 }
@@ -81,12 +91,6 @@ ul{
   text-align:center;
   font-size:25px;
 }
-#monitorlist .monitorlist_row .status_up{
-  color:#28C946;
-}
-#monitorlist .monitorlist_row .status_down{
-  color:#C92828;
-}
 #monitorlist .monitorlist_row .checkname{
   font-weight:bold;
   font-size:1.1em;
@@ -101,12 +105,6 @@ ul{
 .check_modal #config_panel{
   padding:15px;
 }
-#run_list li{
-  padding:10px;
-}
-#run_list li:nth-child(even){
-  background:#dfdfdf;
-}
 #monitorlist .check_run.running{
 -webkit-animation:spin 4s linear infinite;
     -moz-animation:spin 4s linear infinite;
@@ -115,3 +113,15 @@ ul{
 @-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
 @-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
 @keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+
+.status_up{
+  color:#28C946;
+}
+.status_down{
+  color:#C92828;
+}
+
+.run_row:hover{
+  color:blue;
+  cursor:pointer;
+}
