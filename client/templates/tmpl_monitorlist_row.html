@@ -1,0 +1,13 @@
+<div class="col_checkbox"><input type="checkbox" data-id="<%= _id %>"/> </div>
+<div class="col_updown"><span class="<%= statusCls %>" > </span> </div>
+<div class="col_checkname"><div class="checkname"><%=name %> </div> <div class="description"><%= description %> </div> </div>
+<div class="col_checktype"><%= type.toUpperCase() %> </div>
+<div class="col_checkuptime"><%= upSince %> </div>
+<div class="col_checkupratio"><%=upRatio %> </div>
+<div class="col_tool">
+  <span class="check_run  glyphicon glyphicon-play disabled" title="Run the check"></span> 
+  <span class="check_remove glyphicon glyphicon-remove-sign" title="Remove"></span> 
+  <a class=" glyphicon glyphicon-pencil" title="Edit" href="#edit/<%= _id %>"></a> 
+  <a class="check_details glyphicon glyphicon-list-alt" title="Details" href="#detail/<%= _id %>"></a> 
+ 
+</div>
