@@ -3,8 +3,9 @@
     routes: {
       "create": "create",
       "edit/:id": "edit",
-      "detail/:id?:queryString": "detail",
-      "detail/:id": "detail",
+      "check/:id": "check",
+      "check/:id?:queryString": "check",
+      "rundetail/:runid": "rundetail",
       "*path": "default"
     },
     default: function() {
@@ -21,21 +22,24 @@
     app.views.editCheck.setModel(model);
     app.views.editCheck.render();
   });
-  app.router.on("route:detail", function(id, queryString) {
+  app.router.on("route:check", function(id, queryString) {
     if (!queryString) {
       queryString = ""
     }
     var model = app.collections.checks.get(id);
-    var col = new app.collectionCls.RunCollection([], {
-      url: model.url() + "/runs?" + queryString
+    var col = app.collections.runs = new app.collectionCls.RunCollection();
+    col.fetch({
+      data: $.param({
+        checkId: model.get("_id")
+      })
     });
     //if (app.views.listRunModal){
     //app.views.listRunModal.modal("hide");
     //app.views.listRunModal.remove();
     //}
-    var view  = new app.ViewCls.ListRunModal({
+    var view = new app.ViewCls.ListRunModal({
       collection: col,
-      tagName:model.get("name")
+      tagName: model.get("name")
     });
     app.body.change(view);
   });

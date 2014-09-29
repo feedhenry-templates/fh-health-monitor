@@ -21,7 +21,8 @@ var Check = Schema({
   createDate:Date,
   status:Number, // 0 - normal, 1 - paused
   totalRun:Number,
-  passedRun:Number
+  passedRun:Number,
+  lastRunId:String
 });
 
 
@@ -30,7 +31,7 @@ var Run = Schema({
   checkObj: Object,
   startDate: Date,
   endDate: Date,
-  response: String,
+  response: Object,
   isSuccessful: Boolean,
   failReason: String
 });

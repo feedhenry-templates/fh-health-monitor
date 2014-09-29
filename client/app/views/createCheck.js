@@ -2,23 +2,19 @@
   app.ViewCls.CreateCheckModal = Backbone.View.extend({
     _action:"Create",
     initialize: function() {
-      this.setElement($("#create_check_modal"));
+      var tmpl=app.tmpl.get("tmpl_create_check",{});
+      this.setElement($(tmpl));
     },
     render: function() {
-      this.$el.modal({
-        remote: "./modals/create_check.html"
-      });
+      this.$el.modal();
+      this.$el.find("#create_check_title").text(this._action+" Check");
+      this.$el.find("#btn_create_task").text(this._action);
     },
     events: {
       "hidden.bs.modal": "onHidden",
       "shown.bs.modal":"onShow",
-      "loaded.bs.modal":"onModalLoaded",
       "click #btngroup_type label": "onTypeClick",
       "submit #createCheckForm": "onFormSubmit"
-    },
-    onModalLoaded:function(){
-      this.$el.find("#create_check_title").text(this._action+" Check");
-      this.$el.find("#btn_create_task").text(this._action);
     },
     onShow:function(){
       this.$el.find("#createCheckForm")[0].reset();

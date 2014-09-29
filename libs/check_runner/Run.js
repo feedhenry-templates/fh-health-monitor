@@ -46,8 +46,9 @@ function afterRun(check,runInst,cb) {
   }
   finished = true;
   runInst.endDate = new Date();
-  check.save(function(err, m) {
-    runInst.save(cb);
+  runInst.save(function(err,m){
+    check.lastRunId=runInst._id;
+    check.save(cb);
   });
 }
 

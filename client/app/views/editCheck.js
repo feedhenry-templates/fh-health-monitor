@@ -1,9 +1,6 @@
 (function() {
   app.ViewCls.EditCheckModal = app.ViewCls.CreateCheckModal.extend({
     _action: "Edit",
-    initialize: function() {
-      this.setElement($("#edit_check_modal"));
-    },
     setModel: function(model) {
       this.model = model;
     },

@@ -96,19 +96,4 @@ router.get("/:id/test",function(req,res){
   });
 });
 
-//retrieve all runs
-router.get("/:id/runs",function(req,res){
-  console.log(req.query);
-  var RunModel=models["Run"];
-  var checkId=req.params.id;
-  var con=req.query;
-  con.checkId=checkId;
-  RunModel.find(con,{response:0,checkObj:0},{sort:{startDate:-1}},function(err,models){
-    if (err){
-      res.status(500).json({err:err.toString()});
-    }else{
-      res.json(models);
-    }
-  });
-});
 module.exports = router;
