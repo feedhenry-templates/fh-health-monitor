@@ -42,11 +42,12 @@ module.exports = function(grunt) {
         logConcurrentOutput: true
       }
     },
-    env : {
-      options : {},
+    env: {
+      options: {},
       // environment variables - see https://github.com/jsoverson/grunt-env for more information
       local: {
-        FH_USE_LOCAL_DB: true
+        FH_USE_LOCAL_DB: true,
+        FH_MONGODB_CONN_URL: "mongodb://fhmonitor:fhmonitor@127.0.0.1/fhmonitor"
       }
     },
     'node-inspector': {
@@ -114,8 +115,8 @@ module.exports = function(grunt) {
     },
     plato: {
       src: {
-        options : {
-          jshint : grunt.file.readJSON('.jshintrc')
+        options: {
+          jshint: grunt.file.readJSON('.jshintrc')
         },
         files: {
           'plato': ['lib/**/*.js']
@@ -125,7 +126,9 @@ module.exports = function(grunt) {
   });
 
   // Load NPM tasks
-  require('load-grunt-tasks')(grunt, {scope: 'devDependencies'});
+  require('load-grunt-tasks')(grunt, {
+    scope: 'devDependencies'
+  });
 
   // Testing tasks
   grunt.registerTask('test', ['shell:unit', 'shell:accept']);

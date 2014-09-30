@@ -3,7 +3,6 @@ var app = (function(module) {
   var initErrs = [];
 
   function init(cb) {
-    NProgress.start();
     _initCollections(function() {
       NProgress.inc();
       _loadAllTemplates(function() {
@@ -14,7 +13,6 @@ var app = (function(module) {
             app.msg.alert(initErrs.join(", "));
           }
           Backbone.history.start();
-          NProgress.done();
           cb();
         });
       })
@@ -26,6 +24,13 @@ var app = (function(module) {
     var tags = $('script[type="text/template"]');
     var count = tags.length;
     _.each(tags, function(item) {
+      if ($(item).html().trim().length>0){
+        count --;
+        if (count ==0){
+          cb();
+        }
+        return;
+      }
       var id = $(item).attr("id");
       var fullPath = path + id + ".html";
       $.get(fullPath, function(data) {

@@ -28,10 +28,11 @@
     }
     var model = app.collections.checks.get(id);
     var col = app.collections.runs = new app.collectionCls.RunCollection();
+    queryString=$.param({
+      checkId:model.get("_id")
+    })+"&"+queryString;
     col.fetch({
-      data: $.param({
-        checkId: model.get("_id")
-      })
+      data: queryString
     });
     //if (app.views.listRunModal){
     //app.views.listRunModal.modal("hide");

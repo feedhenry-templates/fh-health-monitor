@@ -27,5 +27,6 @@ function checkToSummary(check){
   }
   r.checkPage=env.get("hostname","")+"/#check/"+check._id;
   r.lastRunPage=env.get("hostname","")+"/#rundetail/"+check.lastRunId;
+  r.name=check.name;
   return r;
 }
