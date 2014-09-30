@@ -65,7 +65,7 @@ module.exports = function(grunt) {
           stderr: true,
           failOnError: true
         },
-        command: 'env NODE_PATH=. ./node_modules/.bin/turbo test/unit'
+        command: 'env NODE_PATH=. ./node_modules/.bin/mocha test/unit'
       },
       accept: {
         options: {

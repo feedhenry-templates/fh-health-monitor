@@ -1,10 +1,12 @@
+
 var models = require("../../data/mongoose/allModel");
 var CheckModel = models["Check"];
 var RunModel = models["Run"]
 var ObjectId = require("mongoose").Types.ObjectId;
 var log = require("../../log");
 var finished=false;
-bootstrap(process.argv[2]);
+
+bootstrap(process.argv[2],terminate);
 function _init(cb) {
   require("../../data/db/mongoose")(cb);
 }
@@ -58,13 +60,13 @@ function failCheck() {
 }
 
 
-function bootstrap(checkId) {
+function bootstrap(checkId,cb) {
   //init db connection
   _init(function(err) {
     if (err) {
       log.error("Initilise failed.");
       log.error(err.toString());
-      terminate(1);
+      cb(1);
     }
     log.info("Start to run for check:" + checkId);
     //before run init script
@@ -72,17 +74,17 @@ function bootstrap(checkId) {
       if (err) {
         log.error("Bootstrap a check running failed.");
         log.error(err);
-        terminate(1);
+        cb(1);
       } else {
         function _afterRunCb(err) {
 
           if (err) {
             log.error("After run failed.");
             log.error(err);
-            terminate(1);
+            cb(1);
           } else {
             log.info("Running finished for check: " + checkId);
-            terminate(0);
+            cb(0);
           }
         }
         var timer = setTimeout(function() {

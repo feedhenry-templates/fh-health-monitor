@@ -13,12 +13,17 @@ function init(cb) {
     }
   });
   var db = mongoose.connection;
-  db.on("error", cb);
+  if (cb){
+    db.on("error",cb);
+  }
   db.on("connected", function() {
     log.info("Database connected.");
-    cb();
+    if (cb) {
+      cb();
+    }
   });
   db.on('reconnected', function() {
     log.info('Database connection reconvered!');
   });
+  return db;
 }

@@ -5,10 +5,9 @@ var events=require("events");
 var childProc=require("child_process");
 var log=require("../log");
 
-function runCheck(check,cb){
-  var type=check.type;
+function runCheck(checkId,cb){
   var modulePath=__dirname+"/check_runner/run.js";
-  var c=childProc.fork(modulePath,[check._id],{
+  var c=childProc.fork(modulePath,[checkId],{
     env:process.env
   });
   c.on("exit",function(code){
