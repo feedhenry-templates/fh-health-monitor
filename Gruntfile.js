@@ -48,12 +48,22 @@ module.exports = function(grunt) {
       local: {
         FH_USE_LOCAL_DB: true,
         FH_MONGODB_CONN_URL: "mongodb://fhmonitor:fhmonitor@127.0.0.1/fhmonitor"
+      },
+      //environment var for acceptance test
+      accept:{
+        FH_MONGODB_CONN_URL:"mongodb://fhmonitor:fhmonitor@127.0.0.1/fhmonitor_test"
       }
     },
     'node-inspector': {
       dev: {}
     },
     shell: {
+      build:{
+        options:{
+          stdout:true
+        },
+        command: 'python ./build.py'
+      },
       debug: {
         options: {
           stdout: true
@@ -74,7 +84,7 @@ module.exports = function(grunt) {
           stderr: true,
           failOnError: true
         },
-        command: 'env NODE_PATH=. ./node_modules/.bin/turbo --setUp=test/accept/server.js --tearDown=test/accept/server.js test/accept'
+        command: 'env NODE_PATH=. ./node_modules/.bin/nightwatch'
       },
       coverage_unit: {
         options: {
@@ -130,6 +140,8 @@ module.exports = function(grunt) {
     scope: 'devDependencies'
   });
 
+  //build tasks 
+  grunt.registerTask('build',['shell:build']);
   // Testing tasks
   grunt.registerTask('test', ['shell:unit', 'shell:accept']);
   grunt.registerTask('unit', ['shell:unit']);

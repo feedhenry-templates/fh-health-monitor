@@ -71,16 +71,20 @@ def streamConvert():
     data=inf.readline()
     while data:
         if data =="{csslib}\n":
+            print "Argument CSS libraries"
             outf.write(concatCssLibs()+"\n")
         elif data =="{jslib}\n":
+            print "Argument JS libraries"
             outf.write(concatJsLibs()+"\n")
         elif data =="{appfiles}\n":
+            print "Argument App Scripts"
             outf.write(concatAppFiles()+"\n")
         elif data =="{templates}\n":
+            print "Argument HTML Templates"
             outf.write(loadTemplates()+"\n")
         else:
             outf.write(data)
         data=inf.readline()
-
+    print "All Done. Target File: "+targetFile
 
 streamConvert();

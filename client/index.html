@@ -719,7 +719,6 @@ var app = (function(module) {
   var initErrs = [];
 
   function init(cb) {
-    NProgress.start();
     _initCollections(function() {
       NProgress.inc();
       _loadAllTemplates(function() {
@@ -730,7 +729,6 @@ var app = (function(module) {
             app.msg.alert(initErrs.join(", "));
           }
           Backbone.history.start();
-          NProgress.done();
           cb();
         });
       })
@@ -742,7 +740,7 @@ var app = (function(module) {
     var tags = $('script[type="text/template"]');
     var count = tags.length;
     _.each(tags, function(item) {
-      if ($(item).html().length>0){
+      if ($(item).html().trim().length>0){
         count --;
         if (count ==0){
           cb();
@@ -1389,7 +1387,10 @@ app.tmpl=(function(module){
   </script>
   <script>
   $(function(){
-    app.init(function(){});
+    NProgress.start();
+    app.init(function(){
+      NProgress.done();
+    });
   });
   </script>
 </head>

@@ -26,6 +26,7 @@
     "time-grunt": "~0.3.1",
     "grunt-node-inspector": "~0.1.5",
     "grunt-open": "~0.2.3",
+    "nightwatch": "*",
     "grunt-plato": "~1.0.0"
   }
 }
