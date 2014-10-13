@@ -8,10 +8,17 @@ router.use(bodyParser.json());
 router.get("/",function(req,res){
   var RunModel=models["Run"];
   var con=req.query;
-  if (!con.startDate){
-    con.startDate={"$gt":new Date()-3600000*24*2};
+  var limit=100;
+  var offset=0;
+  if (con.limit){
+    limit=con.limit;
+    delete con.limit;
   }
-  RunModel.find(con,{response:0,checkObj:0},{sort:{startDate:-1}},function(err,models){
+  if (con.offset){
+    offset=con.offset;
+    delete con.offset;
+  }
+  RunModel.find(con,{response:0,checkObj:0},{sort:{startDate:-1}}).limit(limit).skip(offset).exec(function(err,models){
     if (err){
       res.status(500).json({err:err.toString()});
     }else{
