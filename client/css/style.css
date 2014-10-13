@@ -35,7 +35,7 @@ ul{
 #monitorlist ul{
   list-style:none;
   margin:0;
-  width:1400px;
+  max-width:1400px;
   margin:0 auto;
   padding:0;
 }
