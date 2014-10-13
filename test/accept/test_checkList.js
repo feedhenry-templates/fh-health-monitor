@@ -8,9 +8,6 @@ module.exports = {
       .waitForElementNotVisible("#nprogress",2000)
       .waitForElementVisible("#monitorlist",1000)
       .assert.elementPresent("#monitorlist_head")
-      .assert.elementNotPresent(".monitorlist_row")
       .end()
-
-
   }
 };

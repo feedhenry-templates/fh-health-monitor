@@ -33,4 +33,21 @@ If you get a port conflict, you can specify the port to start the server on:
 
 ## Supported Checks/Protocols
 
+## Grutn Tasks 
+
+### build 
+Build client assets into a single index.html
+
+### unit
+Runt unit tests 
+
+### accept 
+Run acceptance tests 
+
+### serve 
+start the node application with local env vars 
+
+## Env vars 
+
+* FH_MONGODB_CONN_URL: mongodb connection string. used by mongo db driver to connec to a valid mongodb instance 
 * HTTP(S)
