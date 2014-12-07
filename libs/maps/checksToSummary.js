@@ -1,6 +1,6 @@
-var env=require("../../env");
+var env=require("../env");
 module.exports=function(checks){
-  var overallStatus="ok"; 
+  var overallStatus="ok";
   var r={
     result:"ok",
     details:[]

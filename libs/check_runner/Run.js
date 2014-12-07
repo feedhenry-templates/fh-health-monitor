@@ -2,7 +2,7 @@ var models = require("../../data/mongoose/allModel");
 var CheckModel = models["Check"];
 var RunModel = models["Run"]
 var ObjectId = require("mongoose").Types.ObjectId;
-var log = require("../../log");
+var log = require("../../libs/log");
 var finished=false;
 bootstrap(process.argv[2]);
 function _init(cb) {
@@ -41,7 +41,7 @@ function onRun(check,runInst,cb) {
 
 function afterRun(check,runInst,cb) {
   if (finished) {
-    //TODO some log 
+    //TODO some log
     return cb();
   }
   finished = true;

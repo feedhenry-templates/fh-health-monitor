@@ -1,6 +1,6 @@
 module.exports=Timer;
-var env = require("../env");
-var log=require("../log");
+var env = require("./env");
+var log=require("./log");
 function Timer() {
   this.interval = env.get("TIMER_INTERVAL", 60); // seconds
   this.funcs = [];

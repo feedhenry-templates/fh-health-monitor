@@ -1,9 +1,9 @@
 var timer = require("./timer");
 var models = require("../data/mongoose/allModel");
-var env=require("../env");
+var env=require("./env");
 var cache = require("./cache/" + env.get("CACHE_TYPE", "mem"));
 var CheckModel = models["Check"];
-var log = require("../log");
+var log = require("./log");
 var runner=require("./runner");
 function init(cb) {
   log.info("Check Manager subscribe to timer.");
@@ -48,7 +48,7 @@ function cacheList(cb) {
 function loadListFromDb(cb) {
   log.info("Load check list from database.");
   CheckModel.find({
-    status:{$ne:1} 
+    status:{$ne:1}
   }, {
     _id: 1,
     interval: 1,

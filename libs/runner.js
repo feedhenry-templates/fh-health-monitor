@@ -3,7 +3,7 @@ exports.runCheck=runCheck;
 var util=require("util");
 var events=require("events");
 var childProc=require("child_process");
-var log=require("../log");
+var log=require("./log");
 
 function runCheck(check,cb){
   var type=check.type;
@@ -19,4 +19,3 @@ function runCheck(check,cb){
     }
   });
 }
-

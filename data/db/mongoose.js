@@ -1,9 +1,9 @@
 module.exports = init;
 
-var env = require("../../env");
-var connStr = env.get("FH_MONGODB_CONN_URL", "mongodb://fhmonitor:fhmonitor@127.0.0.1/fhmonitor");
-var log = require("../../log");
 var mongoose = require("mongoose");
+var env = require("../../libs/env");
+var log = require("../../libs/log");
+var connStr = env.get("FH_MONGODB_CONN_URL");
 
 function init(cb) {
   log.info("Start to initialise database connections.");
