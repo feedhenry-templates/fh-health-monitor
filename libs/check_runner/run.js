@@ -1,26 +1,23 @@
-var models = require("../../data/mongoose/allModel");
-var CheckModel = models["Check"];
-var RunModel = models["Run"]
-var ObjectId = require("mongoose").Types.ObjectId;
-var log = require("../../libs/log");
-var finished=false;
+var models = require('../../data/mongoose/allModel');
+var CheckModel = models['Check'];
+var RunModel = models['Run'];
+var ObjectId = require('mongoose').Types.ObjectId;
+var log = require('../../libs/log');
+var finished = false;
 bootstrap(process.argv[2]);
 function _init(cb) {
-  require("../../data/db/mongoose")(cb);
+  require('../../data/db/mongoose')(cb)
 }
-
 function loadCheck(checkId, cb) {
-  CheckModel.findById(new ObjectId(checkId), cb);
+  CheckModel.findById(new ObjectId(checkId), cb)
 }
-
-
 function beforeRun(checkId, cb) {
-  loadCheck(checkId, function(err, check) {
+  loadCheck(checkId, function (err, check) {
     if (err) {
-      cb(err);
+      cb(err)
     } else {
       if (!check.totalRun) {
-        check.totalRun = 0;
+        check.totalRun = 0
       }
       check.totalRun += 1;
       check.lastRun = new Date();
@@ -29,100 +26,92 @@ function beforeRun(checkId, cb) {
         checkObj: check,
         startDate: new Date()
       });
-      cb(null, check, runInst);
+      cb(null, check, runInst)
     }
-  });
+  })
 }
-
-function onRun(check,runInst,cb) {
-  var type=check.type;
-  require(__dirname+"/"+type+".js")(check,runInst,cb);
+function onRun(check, runInst, cb) {
+  var type = check.type;
+  require(__dirname + '/' + type + '.js')(check, runInst, cb)
 }
-
-function afterRun(check,runInst,cb) {
+function afterRun(check, runInst, cb) {
   if (finished) {
     //TODO some log
-    return cb();
+    return cb()
   }
   finished = true;
   runInst.endDate = new Date();
-  runInst.save(function(err,m){
-    check.lastRunId=runInst._id;
-    check.save(cb);
-  });
+  runInst.save(function (err, m) {
+    check.lastRunId = runInst._id;
+    check.save(cb)
+  })
 }
-
-
 function failCheck() {
-  //TODO add notification
 }
-
-
 function bootstrap(checkId) {
   //init db connection
-  _init(function(err) {
+  _init(function (err) {
     if (err) {
-      log.error("Initilise failed.");
+      log.error('Initilise failed.');
       log.error(err.toString());
-      terminate(1);
+      terminate(1)
     }
-    log.info("Start to run for check:" + checkId);
+    log.info('Start to run for check:' + checkId);
     //before run init script
-    beforeRun(checkId,function(err, check, runInst) {
-      if (err) {
-        log.error("Bootstrap a check running failed.");
-        log.error(err);
-        terminate(1);
-      } else {
-        function _afterRunCb(err) {
-
-          if (err) {
-            log.error("After run failed.");
-            log.error(err);
-            terminate(1);
-          } else {
-            log.info("Running finished for check: " + checkId);
-            terminate(0);
-          }
+    beforeRun(checkId, function (err, check, runInst) {
+      function _afterRunCb(err) {
+        if (err) {
+          log.error('After run failed.');
+          log.error(err);
+          terminate(1)
+        } else {
+          log.info('Running finished for check: ' + checkId);
+          terminate(0)
         }
-        var timer = setTimeout(function() {
-          log.error("Timeout to run check:" + checkId);
+      }
+
+      if (err) {
+        log.error('Bootstrap a check running failed.');
+        log.error(err);
+        terminate(1)
+      } else {
+        var timer = setTimeout(function () {
+          log.error('Timeout to run check:' + checkId);
           runInst.isSuccessful = false;
-          runInst.failReason = "Execution timeout.";
+          runInst.failReason = 'Execution timeout.';
           check.lastPass = false;
           check.lastFail = new Date();
           failCheck();
-          afterRun(check,runInst,_afterRunCb);
+          afterRun(check, runInst, _afterRunCb)
         }, check.timeout * 1000);
         //todo add timeout check
-        onRun(check,runInst,function(err, res) {
+        onRun(check, runInst, function (err, res) {
           clearTimeout(timer);
           if (err) {
-            log.error("Running check failed.");
+            log.error('Running check failed.');
             log.error(err.toString());
             runInst.isSuccessful = false;
             runInst.failReason = err.toString();
-            runInst.response = res ? res.toString() : "";
+            runInst.response = res ? res.toString() : '';
             check.lastPass = false;
             check.lastFail = new Date();
-            failCheck();
+            failCheck()
           } else {
-            log.info("Running check succeed.");
+            log.info('Running check succeed.');
             runInst.isSuccessful = true;
             runInst.response = res.toString();
             if (!check.passedRun) {
-              check.passedRun = 0;
+              check.passedRun = 0
             }
             check.passedRun += 1;
-            check.lastPass=true;
+            check.lastPass = true
           }
-          afterRun(check,runInst,_afterRunCb);
-        });
+          afterRun(check, runInst, _afterRunCb)
+        })
       }
-    });
-  });
+    })
+  })
 }
-
 function terminate(exitCode) {
-  process.exit(exitCode);
+  process.exit(exitCode)
 }
