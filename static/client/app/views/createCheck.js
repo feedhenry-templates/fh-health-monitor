@@ -47,7 +47,7 @@
       json.config = config;
       //hardcode notification as email notification
       json.notifications = [];
-      if (json.email_addresses.length > 0) {
+      if (json.email_addresses && json.email_addresses.length > 0) {
         var emailArr = json.email_addresses.split(",");
         for (var i = 0; i < emailArr.length; i++) {
           json.notifications.push({
