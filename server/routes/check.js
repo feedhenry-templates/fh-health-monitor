@@ -14,8 +14,10 @@ router.use(bodyParser.json());
 //list all checks
 router.get("/", function(req, res) {
   var CheckModel = models["Check"];
-  CheckModel.find(function(err, allChecks) {
-    res.json(allChecks);
+  CheckModel.find().sort('name').exec(function(err, allChecks) {
+    if (err) return res.send(500, err);
+
+    return res.json(allChecks);
   });
 });
 //create a check
