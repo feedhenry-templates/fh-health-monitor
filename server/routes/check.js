@@ -15,7 +15,7 @@ router.use(bodyParser.json());
 router.get("/", function(req, res) {
   var CheckModel = models["Check"];
   CheckModel.find().sort('name').exec(function(err, allChecks) {
-    if (err) return res.send(500, err);
+    if (err) return res.status(500).json(err);
 
     return res.json(allChecks);
   });
