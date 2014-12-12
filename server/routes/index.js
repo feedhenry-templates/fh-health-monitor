@@ -1,7 +1,6 @@
 
 module.exports = function(req, res, next) {
   var readOnly = false;
-  console.log('req', req);
   if (req.url !== '/admin') {
     readOnly = true;
   }
