@@ -6,17 +6,6 @@
 <link rel="stylesheet" href="css/nprogress.css"/>
 <link rel="stylesheet" href="css/bootstrap.min.css"/>
 <link rel="stylesheet" href="css/style.css"/>
-</head>
-
-<body>
-<div id="header" class="clearfix">
-  <div class="title pull-left">Monitoring</div>
-  <div class="pull-right"><a href="#create" class="add_new btn btn-primary">Add New</a></div>
-</div>
-<div id="body">
-</div>
-
-
 <script type="application/javascript" src="js/jquery.1.11.1.min.js"></script>
 <script type="application/javascript" src="js/bootstrap.js"></script>
 <script type="application/javascript" src="js/underscore.js"></script>
@@ -52,11 +41,18 @@
 <script type="application/javascript" src="app/routes/rundetail.js"></script>
 <script>
 $(function(){
-  window.readOnly = true;
-  $('.add_new').attr('disabled', 'disabled');
   app.init(function(){});
 });
 </script>
+</head>
+
+<body>
+<div id="header" class="clearfix">
+  <div class="title pull-left">Monitoring</div>
+  <div class="pull-right"><a href="#create" class="btn btn-primary">Add New</a></div>
+</div>
+<div id="body">
+</div>
 
 <!-- templates -->
 <script type="text/template" id="tmpl_monitorlist_row"> </script>

@@ -62,6 +62,9 @@
       }
       var tmpl = app.tmpl.get("tmpl_monitorlist_row", attr);
       this.$el.html($(tmpl));
+      if (window.readOnly) {
+        this.$el.find('.check_remove,.check_edit').remove();
+      }
     },
     events: {
       "click .check_remove": "onRemove",
