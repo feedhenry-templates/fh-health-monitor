@@ -54,6 +54,7 @@ function initRoutes(cb) {
   app.use(require("../server/hostmiddleware"));
 
   //app routes
+  app.get(/\/$|\/admin$/, require('../server/routes/index'));
   app.use("/checks", require("../server/routes/check"));
   app.use("/runs", require("../server/routes/run"));
   app.use("/api", require("../server/routes/api"));

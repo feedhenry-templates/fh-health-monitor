@@ -25,6 +25,9 @@ app.use('/mbaas', mbaasExpress.mbaas);
 app.use(mbaasExpress.fhmiddleware());
 
 // fhlint-begin: custom-routes
+app.set('views', __dirname + '/views');
+app.engine('html', require('ejs').renderFile);
+app.set('view engine', 'ejs');
 app.use('/', require('./libs/monitor'));
 // fhlint-end
 
