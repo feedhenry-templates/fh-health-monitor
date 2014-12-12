@@ -132,8 +132,14 @@ module.exports = function(grunt) {
           jshint : grunt.file.readJSON('.jshintrc')
         },
         files: {
-          'plato': ['lib/**/*.js']
+          'plato': ['Gruntfile.js', 'libs/**/*.js', 'tests/**/*.js', 'static/client/app/**/*.js']
         }
+      }
+    },
+    jshint: {
+      all: ['Gruntfile.js', 'libs/**/*.js', 'tests/**/*.js', 'static/client/app/**/*.js'],
+      options: {
+        jshintrc: true
       }
     }
   });
