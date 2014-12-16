@@ -1,13 +1,14 @@
-var mgr=require("../../libs/checkMgr")
+var mgr = require("../../libs/checkMgr");
 
-describe("check manager",function(){
-  before(function(done){
+module.exports = {
+  setUp: function(done) {
     require("../../data/db/mongoose")(done);
-  });
-  it ("should respond on time call",function(done){
+  },
+
+  'respond on timer call': function(test) {
     mgr.onTimerCall();
-    setTimeout(function(){
-      done();
-    },1000);
-  });
-})
+    setTimeout(function() {
+      test.done();
+    }, 1000);
+  }
+};
