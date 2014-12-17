@@ -126,6 +126,6 @@ module.exports = function(grunt) {
 
   grunt.registerTask('serve', ['env:local', 'concurrent:serve']);
   grunt.registerTask('debug', ['env:local', 'concurrent:debug']);
-  grunt.registerTask('default', ['serve']);
   grunt.registerTask('test', ['jasmine', 'nodeunit']);
+  grunt.registerTask('default', ['jshint', 'test']);
 };
