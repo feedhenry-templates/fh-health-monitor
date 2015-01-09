@@ -1,4 +1,4 @@
-# Group FeedHenry Health Monitor Service
+# FeedHenry Health Monitor Service
 
 The FeedHenry Health Monitor service is intended for monitoring back end systems which are accessable to the FeedHenry cloud (via VPN or IP Punchthrough) but may not be exposed publicaly on the Internet.
 
