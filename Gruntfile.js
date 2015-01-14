@@ -5,6 +5,31 @@ module.exports = function(grunt) {
   // Project Configuration
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
+    jasmine: {
+      client: {
+        src: 'static/client/app/**/*.js',
+        options: {
+          vendor: [
+            'static/client/js/jquery.1.11.1.min.js',
+            'static/client/js/bootstrap.js',
+            'static/client/js/underscore.js',
+            'static/client/js/backbone.js',
+            'static/client/js/nprogress.js'
+          ],
+          specs: 'spec/**/*.spec.js',
+          helpers: 'spec/**/*.helper.js'
+        }
+      }
+    },
+    nodeunit: {
+      all: ['tests/**/test_*.js'],
+      options: {
+        reporter: 'default',
+        reporterOptions: {
+          output: 'report'
+        }
+      }
+    },
     watch: {
       js: {
         files: ['gruntfile.js', 'application.js', 'lib/**/*.js', 'test/**/*.js'],
@@ -42,8 +67,8 @@ module.exports = function(grunt) {
         logConcurrentOutput: true
       }
     },
-    env : {
-      options : {},
+    env: {
+      options: {},
       // environment variables - see https://github.com/jsoverson/grunt-env for more information
       local: {
         FH_USE_LOCAL_DB: true,
@@ -66,56 +91,6 @@ module.exports = function(grunt) {
     'node-inspector': {
       dev: {}
     },
-    shell: {
-      debug: {
-        options: {
-          stdout: true
-        },
-        command: 'env NODE_PATH=. node --debug-brk application.js'
-      },
-      unit: {
-        options: {
-          stdout: true,
-          stderr: true,
-          failOnError: true
-        },
-        command: 'env NODE_PATH=. ./node_modules/.bin/turbo test/unit'
-      },
-      accept: {
-        options: {
-          stdout: true,
-          stderr: true,
-          failOnError: true
-        },
-        command: 'env NODE_PATH=. ./node_modules/.bin/turbo --setUp=test/accept/server.js --tearDown=test/accept/server.js test/accept'
-      },
-      coverage_unit: {
-        options: {
-          stdout: true,
-          stderr: true,
-          failOnError: true
-        },
-        command: [
-          'rm -rf coverage cov-unit',
-          'env NODE_PATH=. ./node_modules/.bin/istanbul cover --dir cov-unit ./node_modules/.bin/turbo -- test/unit',
-          './node_modules/.bin/istanbul report',
-          'echo "See html coverage at: `pwd`/coverage/lcov-report/index.html"'
-        ].join('&&')
-      },
-      coverage_accept: {
-        options: {
-          stdout: true,
-          stderr: true,
-          failOnError: true
-        },
-        command: [
-          'rm -rf coverage cov-accept',
-          'env NODE_PATH=. ./node_modules/.bin/istanbul cover --dir cov-accept ./node_modules/.bin/turbo -- --setUp=test/accept/server.js --tearDown=test/accept/server.js test/accept',
-          './node_modules/.bin/istanbul report',
-          'echo "See html coverage at: `pwd`/coverage/lcov-report/index.html"'
-        ].join('&&')
-      }
-    },
     open: {
       debug: {
         path: 'http://127.0.0.1:8080/debug?port=5858',
@@ -128,8 +103,8 @@ module.exports = function(grunt) {
     },
     plato: {
       src: {
-        options : {
-          jshint : grunt.file.readJSON('.jshintrc')
+        options: {
+          jshint: grunt.file.readJSON('.jshintrc')
         },
         files: {
           'plato': ['Gruntfile.js', 'libs/**/*.js', 'tests/**/*.js', 'static/client/app/**/*.js']
@@ -137,32 +112,20 @@ module.exports = function(grunt) {
       }
     },
     jshint: {
-      all: ['Gruntfile.js', 'libs/**/*.js', 'tests/**/*.js', 'static/client/app/**/*.js'],
-      options: {
-        jshintrc: true
-      }
+      all: ['Gruntfile.js', 'libs/**/*.js', 'tests/**/*.js', 'static/client/app/**/*.js', 'spec/**/*.js'],
+      options: grunt.file.readJSON('.jshintrc')
     }
   });
 
   // Load NPM tasks
-  require('load-grunt-tasks')(grunt, {scope: 'devDependencies'});
-
-  // Testing tasks
-  grunt.registerTask('test', ['shell:unit', 'shell:accept']);
-  grunt.registerTask('unit', ['shell:unit']);
-  grunt.registerTask('accept', ['env:local', 'shell:accept']);
-
-  // Coverate tasks
-  grunt.registerTask('coverage', ['shell:coverage_unit', 'shell:coverage_accept']);
-  grunt.registerTask('coverage-unit', ['shell:coverage_unit']);
-  grunt.registerTask('coverage-accept', ['env:local', 'shell:coverage_accept']);
-
-  // Making grunt default to force in order not to break the project.
-  grunt.option('force', true);
+  require('load-grunt-tasks')(grunt, {
+    scope: 'devDependencies'
+  });
 
   grunt.registerTask('analysis', ['plato:src', 'open:platoReport']);
 
   grunt.registerTask('serve', ['env:local', 'concurrent:serve']);
   grunt.registerTask('debug', ['env:local', 'concurrent:debug']);
-  grunt.registerTask('default', ['serve']);
+  grunt.registerTask('test', ['jasmine', 'nodeunit']);
+  grunt.registerTask('default', ['jshint', 'test']);
 };
