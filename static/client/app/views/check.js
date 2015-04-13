@@ -15,15 +15,15 @@
         attr.statusCls = "glyphicon glyphicon-minus-sign status_unknown";
       }
       if (attr.totalRun) {
-        if (!attr.passedRun){
-          attr.passedRun=0;
+        if (!attr.passedRun) {
+          attr.passedRun = 0;
         }
         var f = Math.round((attr.passedRun / attr.totalRun) * 10000) / 100;
         attr.upRatio = f + "%";
-      }else{
-        attr.upRatio="N/A";
+      } else {
+        attr.upRatio = "N/A";
       }
-      if (attr.lastFail && attr.lastPass===true) {
+      if (attr.lastFail && attr.lastPass === true) {
         var span = new Date() - new Date(attr.lastFail);
         span = span / 1000;
         var timeSpan = [
@@ -34,7 +34,7 @@
           60,
           1
         ]
-        var timeDix=[
+        var timeDix = [
           "y",
           "m",
           "d",
@@ -42,47 +42,53 @@
           "m",
           "s"
         ]
-        var offset=0;
-        var upsince="";
-        var bit=0;
-        while (offset<timeSpan.length && bit<2){
-          var tSpan=timeSpan[offset];
-          var n=span/tSpan;
-          if (n<1){
+        var offset = 0;
+        var upsince = "";
+        var bit = 0;
+        while (offset < timeSpan.length && bit < 2) {
+          var tSpan = timeSpan[offset];
+          var n = span / tSpan;
+          if (n < 1) {
             offset++;
-          }else{
-            upsince+=Math.floor(n)+" "+timeDix[offset]+" ";
+          } else {
+            upsince += Math.floor(n) + " " + timeDix[offset] + " ";
             bit++;
-            span=span-tSpan*Math.floor(n);
+            span = span - tSpan * Math.floor(n);
           }
         }
-        attr.upSince=upsince;
-      }else{
-        attr.upSince="N/A";
+        attr.upSince = upsince;
+      } else {
+        attr.upSince = "N/A";
       }
       var tmpl = app.tmpl.get("tmpl_monitorlist_row", attr);
       this.$el.html($(tmpl));
+      if (window.readOnly) {
+        this.$el.find('.check_remove,.check_edit').remove();
+      }
     },
     events: {
       "click .check_remove": "onRemove",
       "click .check_run": "onClickRun"
     },
     onRemove: function() {
-      this.model.destroy();
+      var res = confirm("Are you sure to remove this item? It cannot be undone.")
+      if (res) {
+        this.model.destroy();
+      }
     },
     bindModel: function() {
       this.model.on("change", this.render.bind(this));
-      this.model.on("start_run",this.startRun.bind(this));
-      this.model.on("end_run",this.endRun.bind(this));
+      this.model.on("start_run", this.startRun.bind(this));
+      this.model.on("end_run", this.endRun.bind(this));
     },
     onClickRun: function() {
       var self = this;
       this.model.run();
     },
-    startRun:function(){
+    startRun: function() {
       this.$el.find(".check_run").addClass("running");
     },
-    endRun:function(){
+    endRun: function() {
       this.$el.find(".check_run").removeClass("running");
     }
   });

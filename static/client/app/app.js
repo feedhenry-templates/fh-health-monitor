@@ -1,26 +1,26 @@
-var app = (function(module) {
+var app = (function (module) {
   module.init = init;
   var initErrs = [];
-
   function init(cb) {
-    _initCollections(function() {
+    NProgress.start();
+    _initCollections(function () {
       NProgress.inc();
-      _loadAllTemplates(function() {
+      _loadAllTemplates(function () {
         NProgress.inc();
-        _initViews(function() {
+        _initViews(function () {
           NProgress.inc();
           if (initErrs.length > 0) {
-            app.msg.alert(initErrs.join(", "));
+            app.msg.alert(initErrs.join(', '))
           }
           Backbone.history.start();
-          cb();
+          NProgress.done();
+          cb()
         });
       })
-    });
+    })
   }
-
   function _loadAllTemplates(cb) {
-    var path = "./templates/";
+    var path = './templates/';
     var tags = $('script[type="text/template"]');
     var count = tags.length;
     _.each(tags, function(item) {
@@ -36,47 +36,44 @@ var app = (function(module) {
       $.get(fullPath, function(data) {
         $(item).text(data);
         count--;
-        if (count == 0) {
-          cb();
+        if (count === 0) {
+          cb()
         }
-      });
-    });
+      })
+    })
   }
-
   function _initCollections(cb) {
     var count = 0;
     for (var key in app.collections) {
       count++;
       app.collections[key].fetch({
-        error: function() {
+        error: function () {
           console.error(arguments);
-          initErrs.push("Collection initialisation failed.");
+          initErrs.push('Collection initialisation failed.');
           count--;
-          if (count == 0) {
-            cb();
+          if (count === 0) {
+            cb()
           }
         },
-        success: function() {
+        success: function () {
           NProgress.inc();
           count--;
-          if (count == 0) {
-            cb();
+          if (count === 0) {
+            cb()
           }
         }
       })
     }
   }
-
   function _initViews(cb) {
     app.views.checkListView = new app.ViewCls.CheckListView();
     app.views.createCheck = new app.ViewCls.CreateCheckModal();
     app.views.editCheck = new app.ViewCls.EditCheckModal();
     //init home page -- check list view
     app.views.checkListView.render();
-    cb();
+    cb()
   }
-
-  return module;
+  return module
 })({
   ViewCls: {},
   views: {},
@@ -84,4 +81,4 @@ var app = (function(module) {
   collections: {},
   router: {},
   collectionCls: {}
-});
+})

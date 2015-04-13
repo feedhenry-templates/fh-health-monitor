@@ -47,8 +47,8 @@ describe("Running module", function() {
       "timeout": 30,
       "interval": 5,
       config: {
-        "host": "109.228.19.167",
-        "port": 22
+        "host": "127.0.0.1",
+        "port":27017 
       }
     }, function(err, m) {
       runner.runCheck(m._id, function(err) {

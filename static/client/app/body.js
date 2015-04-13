@@ -3,6 +3,9 @@ app.body=(function(module){
    var curView=null;
 
    function change(view){
+     if (curView ==view){
+       return;
+     }
      var lastView=curView;
       if (curView){
         curView.$el.fadeOut(function(){

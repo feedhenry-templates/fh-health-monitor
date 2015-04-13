@@ -1,12 +1,11 @@
 var timer = require("./timer");
 var models = require("../data/mongoose/allModel");
-var env = require("../env");
+var env = require("./env");
 var cache = require("./cache/" + env.get("CACHE_TYPE", "mem"));
 var CheckModel = models["Check"];
-var log = require("../log");
+var log = require("./log");
 var runner = require("./runner");
 var async = require("async");
-
 function init(cb) {
   log.info("Check Manager subscribe to timer.");
   timer.onTime(onTimerCall);

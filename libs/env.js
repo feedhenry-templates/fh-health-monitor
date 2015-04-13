@@ -3,9 +3,11 @@ exports.set=set;
 
 var sysEnv=process.env;
 var hardCoded={
-  "staticFolder":__dirname+"/client/",
+  "staticFolder":__dirname+"/static/client/",
+  "staticErrorFolder":__dirname+"/static/error/",
+
   "TIMER_INTERVAL":10,
-  "FH_MONGODB_CONN_URL":"mongodb://fhmonitor:fhmonitor@127.0.0.1/fhmonitor",
+  "FH_MONGODB_CONN_URL":"mongodb://127.0.0.1/FH_LOCAL",
   "FH_PORT":8801
 }
 var dynamic={
