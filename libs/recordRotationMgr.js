@@ -12,6 +12,7 @@ var rotationRunning = false;
 var RunModel = models["Run"];
 var CheckModel = models["Check"];
 var async = require("async");
+var env=require("./env.js");
 
 function init(cb) {
   log.info("Rotation Manager subscribe to timer.");
@@ -55,7 +56,7 @@ function rotate(cb) {
     } else {
       async.each(allChecks, function(obj, rotateCb) {
         var checkId=obj._id;
-        var rotateDay=obj.recordRotation===undefined?20:obj.recordRotation;
+        var rotateDay=obj.recordRotation===undefined?env.get("DEF_RECORD_ROTATION",20):obj.recordRotation;//TODO env var for default rotate day
         var deadLine=new Date(new Date().getTime()-rotateDay*24*3600*1000);
         log.info("Rotate records for check: "+checkId+" where rocords are older than: "+deadLine);
         RunModel.remove({
