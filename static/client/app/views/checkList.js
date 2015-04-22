@@ -10,6 +10,7 @@
     },
     filterChecks: function filterChecks(){
       var filter = this.$el.find("#filterText").val();
+      window.filter = filter;
       this.getCol().forEach(this.removeRowView.bind(this));
       var col = this.getFilteredChecks(filter);
       col.forEach(this.addRowView.bind(this));
