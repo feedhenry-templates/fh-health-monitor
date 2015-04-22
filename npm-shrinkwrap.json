@@ -95,7 +95,7 @@
           "dependencies": {
             "mime": {
               "version": "1.2.11",
-              "from": "mime@~1.2.9",
+              "from": "mime@~1.2.11",
               "resolved": "https://registry.npmjs.org/mime/-/mime-1.2.11.tgz"
             },
             "negotiator": {
@@ -642,7 +642,11 @@
                 },
                 "lodash": {
                   "version": "2.4.1",
+<<<<<<< HEAD
                   "from": "lodash@^2.4.1",
+=======
+                  "from": "lodash@2.4.1",
+>>>>>>> d12111eb2366c2cedaf0509fbe638ffdf04cad63
                   "resolved": "https://registry.npmjs.org/lodash/-/lodash-2.4.1.tgz"
                 },
                 "rc": {
@@ -763,7 +767,7 @@
                     },
                     "readable-stream": {
                       "version": "1.1.13",
-                      "from": "readable-stream@1.1.x",
+                      "from": "readable-stream@1.1",
                       "resolved": "https://registry.npmjs.org/readable-stream/-/readable-stream-1.1.13.tgz",
                       "dependencies": {
                         "core-util-is": {
@@ -930,7 +934,7 @@
         },
         "colors": {
           "version": "0.6.2",
-          "from": "colors@~0.6.2",
+          "from": "colors@0.6.x",
           "resolved": "https://registry.npmjs.org/colors/-/colors-0.6.2.tgz"
         },
         "dateformat": {
@@ -964,9 +968,9 @@
                   "resolved": "https://registry.npmjs.org/minimatch/-/minimatch-0.3.0.tgz",
                   "dependencies": {
                     "lru-cache": {
-                      "version": "2.6.1",
+                      "version": "2.5.2",
                       "from": "lru-cache@2",
-                      "resolved": "https://registry.npmjs.org/lru-cache/-/lru-cache-2.6.1.tgz"
+                      "resolved": "https://registry.npmjs.org/lru-cache/-/lru-cache-2.5.2.tgz"
                     },
                     "sigmund": {
                       "version": "1.0.0",
@@ -1013,13 +1017,13 @@
         },
         "minimatch": {
           "version": "0.2.14",
-          "from": "minimatch@~0.2.12",
+          "from": "minimatch@~0.2.14",
           "resolved": "https://registry.npmjs.org/minimatch/-/minimatch-0.2.14.tgz",
           "dependencies": {
             "lru-cache": {
-              "version": "2.6.1",
+              "version": "2.5.2",
               "from": "lru-cache@2",
-              "resolved": "https://registry.npmjs.org/lru-cache/-/lru-cache-2.6.1.tgz"
+              "resolved": "https://registry.npmjs.org/lru-cache/-/lru-cache-2.5.2.tgz"
             },
             "sigmund": {
               "version": "1.0.0",
@@ -1057,7 +1061,7 @@
         },
         "which": {
           "version": "1.0.9",
-          "from": "which@~1.0.5",
+          "from": "which@1.0.x",
           "resolved": "https://registry.npmjs.org/which/-/which-1.0.9.tgz"
         },
         "js-yaml": {
@@ -1270,7 +1274,7 @@
                         },
                         "inherits": {
                           "version": "2.0.1",
-                          "from": "inherits@~2.0.1",
+                          "from": "inherits@2",
                           "resolved": "https://registry.npmjs.org/inherits/-/inherits-2.0.1.tgz"
                         }
                       }
@@ -1320,7 +1324,7 @@
             },
             "libbase64": {
               "version": "0.1.0",
-              "from": "libbase64@^0.1.0",
+              "from": "libbase64@0.1.0",
               "resolved": "https://registry.npmjs.org/libbase64/-/libbase64-0.1.0.tgz"
             },
             "libmime": {
@@ -1478,7 +1482,7 @@
             },
             "mime": {
               "version": "1.2.11",
-              "from": "mime@~1.2.9",
+              "from": "mime@~1.2.11",
               "resolved": "https://registry.npmjs.org/mime/-/mime-1.2.11.tgz"
             }
           }
