@@ -642,11 +642,7 @@
                 },
                 "lodash": {
                   "version": "2.4.1",
-<<<<<<< HEAD
-                  "from": "lodash@^2.4.1",
-=======
                   "from": "lodash@2.4.1",
->>>>>>> d12111eb2366c2cedaf0509fbe638ffdf04cad63
                   "resolved": "https://registry.npmjs.org/lodash/-/lodash-2.4.1.tgz"
                 },
                 "rc": {
