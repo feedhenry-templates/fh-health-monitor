@@ -1,6 +1,6 @@
 <div class="col_checkbox"><input type="checkbox" data-id="<%= _id %>"/> </div>
 <div class="col_updown"><span class="<%= statusCls %>" > </span> </div>
-<div class="col_checkname"><div class="checkname"><%=window.filter %> - <%=name %> </div> <div class="description"><%= description %> </div> </div>
+<div class="col_checkname"><div class="checkname"><%= window.filter ? name.replace(new RegExp(window.filter, 'g'), "<span class='filter-match'>" + window.filter + "</span>") : name %> </div> <div class="description"><%= description %> </div> </div>
 <div class="col_checktype"><%= type.toUpperCase() %> </div>
 <div class="col_checkuptime"><%= upSince %> </div>
 <div class="col_checkupratio"><%=upRatio %> </div>

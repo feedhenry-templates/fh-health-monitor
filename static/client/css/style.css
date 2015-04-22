@@ -128,3 +128,8 @@ ul{
   color:blue;
   cursor:pointer;
 }
+.filter-match{
+    border: 1px solid #777733;
+    border-radius: 4px;
+    background-color: #ffff88;
+}
