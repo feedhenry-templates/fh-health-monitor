@@ -5,7 +5,14 @@
       this.bindCollection();
     },
     events: {
-      "click button#checkUrlBtn": "genCheckUrl"
+      "click button#checkUrlBtn": "genCheckUrl",
+      "keyup input#filterText": "filterChecks"
+    },
+    filterChecks: function filterChecks(){
+      var filter = this.$el.find("#filterText").val();
+      this.getCol().forEach(this.removeRowView.bind(this));
+      var col = this.getFilteredChecks(filter);
+      col.forEach(this.addRowView.bind(this));
     },
     genCheckUrl: function() {
       var eles = this.$el.find("input[type=checkbox]:checked");
@@ -60,6 +67,16 @@
     },
     getCol: function() {
       return app.collections.checks;
+    },
+    getFilteredChecks: function getFilteredChecks(filter) {
+      var col = this.getCol();
+      rets = [];
+      col.forEach(function(check){
+        if( check.attributes.name.indexOf(filter) !== -1 || check.attributes.description.indexOf(filter) !== -1){
+          rets.push(check);
+        }
+      });
+      return rets;
     },
     getAllRowViews: function() {
       return checkRowViews;
