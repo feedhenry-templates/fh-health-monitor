@@ -48,7 +48,7 @@ module.exports = function(grunt) {
       local: {
         FH_USE_LOCAL_DB: true,
         DEV:true,
-        FH_MONGODB_CONN_URL: "mongodb://127.0.0.1/FH_LOCAL",
+        FH_MONGODB_CONN_URL: "mongodb://192.168.33.10/FH_LOCAL",
         FH_SERVICE_MAP: function() {
           /*
            * Define the mappings for your services here - for local development.
@@ -65,7 +65,7 @@ module.exports = function(grunt) {
       },
       //environement for acceptance tests
       accept:{
-        FH_MONGODB_CONN_URL: "mongodb://127.0.0.1/FH_LOCAL",
+        FH_MONGODB_CONN_URL: "mongodb://192.168.33.10/FH_LOCAL",
         FH_SERVICE_MAP: function() {
           /*
            * Define the mappings for your services here - for local development.
