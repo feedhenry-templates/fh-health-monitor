@@ -125,3 +125,25 @@ ul{
   color:blue;
   cursor:pointer;
 }
+div.text-container{
+    margin: auto;
+    width: 960px;
+}
+
+div.text-container h3{
+    text-decoration: underline;
+    color: rgb(52, 52, 52);
+}
+div.text-container h4{
+    text-decoration: underline;
+    color: rgb(86, 86, 86);
+
+}
+div.text-container p{
+    color: rgb(120, 120, 120);
+}
+div.text-container p em{
+    font-style: normal;
+    font-weight: 700;
+    color: rgb(33, 33, 33);
+}

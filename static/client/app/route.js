@@ -6,6 +6,7 @@
       'check/:id': 'check',
       'check/:id?:queryString': 'check',
       'rundetail/:runid': 'rundetail',
+      'documentation': 'documentation',
       '*path': 'default'
     }
   });
@@ -48,5 +49,9 @@
       tagName: model.get('name')
     });
     app.body.change(view)
-  })
+  });
+  app.router.on('route:documentation', function() {
+    var view = new app.ViewCls.Documentation();
+    app.body.change(view);
+  });
 }())
