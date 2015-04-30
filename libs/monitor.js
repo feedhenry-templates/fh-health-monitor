@@ -19,8 +19,7 @@ if (optval(process.env[mongoEnvVar], null) === null) {
 
   // Static route for error pages
   app.use(express.static(path.join(baseStaticPath, "error")));
-}
-else {
+} else {
   var initialised = false;
   log.info("Starting to initialise monitoring service");
   async.series([ //the order of components being initialised is important
