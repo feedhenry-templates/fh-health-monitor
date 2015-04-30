@@ -137,12 +137,14 @@ div.text-container h3{
 div.text-container h4{
     text-decoration: underline;
     color: rgb(86, 86, 86);
+    margin-left: 10px;
 
 }
-div.text-container p{
+div.text-container p, div.text-container ul li, div.text-container ol li{
     color: rgb(120, 120, 120);
+    margin-left: 20px;
 }
-div.text-container p em{
+div.text-container p em, div.text-container ul li em, div.text-container ol li em{
     font-style: normal;
     font-weight: 700;
     color: rgb(33, 33, 33);
