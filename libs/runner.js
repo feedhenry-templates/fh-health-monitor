@@ -3,7 +3,7 @@ exports.runCheck=runCheck;
 var util=require("util");
 var events=require("events");
 var childProc=require("child_process");
-var log=require("../log");
+var log=require("./log");
 
 function runCheck(checkId,cb){
   var modulePath=__dirname+"/check_runner/run.js";
@@ -16,6 +16,5 @@ function runCheck(checkId,cb){
     }else{
       cb(null);
     }
-  });
+  })
 }
-

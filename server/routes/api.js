@@ -19,7 +19,8 @@ router.get("/summary", function(req, res) {
       if (err){
         res.status(500).json({err:err.toString()});
       }else{
-        res.json(require("../../libs/maps/checksToSummary")(docs));
+        res.setHeader("Content-type","application/json");
+        res.end(JSON.stringify(require("../../libs/maps/checksToSummary")(docs),null,4));
       }
     });
   }

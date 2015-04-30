@@ -3,7 +3,7 @@ var models = require("../../data/mongoose/allModel");
 var CheckModel = models["Check"];
 var RunModel = models["Run"]
 var ObjectId = require("mongoose").Types.ObjectId;
-var log = require("../../log");
+var log = require("../log");
 var finished=false;
 
 bootstrap(process.argv[2],terminate);

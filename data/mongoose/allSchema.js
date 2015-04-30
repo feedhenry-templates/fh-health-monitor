@@ -22,7 +22,8 @@ var Check = Schema({
   status:Number, // 0 - normal, 1 - paused
   totalRun:Number,
   passedRun:Number,
-  lastRunId:String
+  lastRunId:String,
+  recordRotation:Number
 });
 
 
