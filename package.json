@@ -10,13 +10,13 @@
     "cors": "2.2.0",
     "ejs": "*",
     "express": "4.0.0",
-    "fh-mbaas-api": "4.7.0",
+    "fh-mbaas-api": "~4.11.0",
     "mongoose": "3.8.15",
     "optval": "1.0.1",
     "request": "2.40.0",
     "underscore": "1.7.0",
     "winston": "0.7.3",
-    "nodemailer":"1.3.0"
+    "nodemailer": "1.3.0"
   },
   "devDependencies": {
     "grunt-concurrent": "latest",
