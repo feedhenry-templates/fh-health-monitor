@@ -37,7 +37,6 @@
     onFormSubmit: function (e) {
       var form = $(e.target);
       var arr = form.serializeArray();
-      debugger;
       var json = {};
       for (var i = 0; i < arr.length; i++) {
         json[arr[i].name] = arr[i].value
