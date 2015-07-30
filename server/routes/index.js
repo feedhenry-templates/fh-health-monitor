@@ -6,6 +6,7 @@ module.exports = function(req, res, next) {
   }
 
   res.render('index', {
+    authPolicy: process.env.AUTH_POLICY,
     readOnly: readOnly
   }, function(err, html) {
     if (err) return res.status(500).send(err);

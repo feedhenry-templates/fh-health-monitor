@@ -5,6 +5,7 @@ var log = require("./log");
 var optval = require("optval")
 var async = require("async");
 var path = require("path");
+var mbaasExpress = require('fh-mbaas-api').mbaasExpress();
 
 // This service requires a dirrect connection to MongoDB in order to work. If this is not available, server up a static page for all requests with instructions on how to enable MongoDB.
 var mongoEnvVar = "FH_MONGODB_CONN_URL";
@@ -55,6 +56,11 @@ function initRoutes(cb) {
 
   //app routes
   app.get(/\/$|\/admin$/, require('../server/routes/index'));
+  
+  if(process.env.AUTH_POLICY){
+    //app.use(mbaasExpress.fhauth({ cache: true, expire: 60 * 60 }));
+  }
+  
   app.use("/checks", require("../server/routes/check"));
   app.use("/runs", require("../server/routes/run"));
   app.use("/api", require("../server/routes/api"));

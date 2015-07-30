@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="css/bootstrap.min.css"/>
 <link rel="stylesheet" href="css/style.css"/>
 <script>
+  window.authPolicy = '<%=authPolicy || ''%>';
   window.readOnly = <%=readOnly%>;
 </script>
 </head>
@@ -14,8 +15,12 @@
 <body>
 <div id="header" class="clearfix">
   <div class="title pull-left">Monitoring</div>
-  <div class="pull-right" title="<%= readOnly ? "go to admin to add new checks." : "" %>"><a href="#create" class="add_new btn btn-primary" <%= readOnly ? 'disabled=disabled' : '' %>>Add New</a></div>
-  <div class="pull-right" title="Documentation"><a href="#documentation" class="btn btn-secondary" >Documentation</a></div>
+  <div class="pull-right" title="<%= readOnly ? "go to admin to add new checks." : "" %>">
+    <a href="#create" class="add_new btn btn-primary" <%= readOnly ? 'disabled=disabled' : '' %>>Add New</a>
+  </div>
+  <div class="pull-right" title="Documentation">
+    <a href="#documentation" class="btn btn-secondary" >Documentation</a>
+  </div>
 </div>
 <div id="body">
 </div>
@@ -26,7 +31,7 @@
 <script type="application/javascript" src="js/underscore.js"></script>
 <script type="application/javascript" src="js/backbone.js"></script>
 <script type="application/javascript" src="js/nprogress.js"></script>
-
+<script type="application/javascript" src="js/feedhenry.min.js"></script>
 
 <!-- Development Application scripts -->
 <script type="application/javascript" src="app/app.js"></script>
@@ -44,6 +49,7 @@
 <script type="application/javascript" src="app/collections/runs.js"></script>
 
 <!-- Views -->
+<script type="application/javascript" src="app/views/login.js"></script>
 <script type="application/javascript" src="app/views/checkList.js"></script>
 <script type="application/javascript" src="app/views/check.js"></script>
 <script type="application/javascript" src="app/views/createCheck.js"></script>
@@ -62,6 +68,7 @@ $(function(){
 </script>
 
 <!-- templates -->
+<script type="text/template" id="tmpl_login"> </script>
 <script type="text/template" id="tmpl_monitorlist_row"> </script>
 <script type="text/template" id="tmpl_create_check"> </script>
 <script type="text/template" id="tmpl_monitorlist"> </script>

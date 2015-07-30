@@ -3,22 +3,47 @@ var app = (function (module) {
   var initErrs = [];
   function init(cb) {
     NProgress.start();
-    _initCollections(function () {
+    _loadAllTemplates(function () {
       NProgress.inc();
-      _loadAllTemplates(function () {
+      _initViews(function () {
         NProgress.inc();
-        _initViews(function () {
+        _verifyAuth(function(){
           NProgress.inc();
-          if (initErrs.length > 0) {
-            app.msg.alert(initErrs.join(', '))
-          }
-          Backbone.history.start();
-          NProgress.done();
-          cb()
+          _initCollections(function () {
+            NProgress.inc();
+            if (initErrs.length > 0) {
+              app.msg.alert(initErrs.join(', '))
+            }
+            //init home page -- check list view
+            app.views.checkListView.render();
+            Backbone.history.start();
+            NProgress.done();
+            cb();
+          });
         });
       })
     })
   }
+  
+  function _verifyAuth(cb){
+    if(!window.authPolicy){ return cb(); }
+    
+    $fh.auth.hasSession(function(err, exist){
+      if(err) {
+        console.log(arugments);
+        initErrs.push('Failed to check session');
+        return cb();
+      }
+      
+      if(exist){
+        cb();
+      } else {
+        app.views.login.render();
+        NProgress.done();
+      }
+    });
+  }
+  
   function _loadAllTemplates(cb) {
     var path = './templates/';
     var tags = $('script[type="text/template"]');
@@ -66,11 +91,10 @@ var app = (function (module) {
     }
   }
   function _initViews(cb) {
+    app.views.login = new app.ViewCls.LoginModal();
     app.views.checkListView = new app.ViewCls.CheckListView();
     app.views.createCheck = new app.ViewCls.CreateCheckModal();
     app.views.editCheck = new app.ViewCls.EditCheckModal();
-    //init home page -- check list view
-    app.views.checkListView.render();
     cb()
   }
   return module
