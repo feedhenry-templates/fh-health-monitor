@@ -10,7 +10,7 @@ router.use(bodyParser.json());
 router.post("/", function(req, res) {
   var opts = { body: req.body, json: true };
   opts.policyId = process.env.AUTH_POLICY;
-  opts.url = process.env.FH_MILLICORE + '/box/srv/1.1/admin/authpolicy/auth';
+  opts.url = 'https://' + process.env.FH_MILLICORE + '/box/srv/1.1/admin/authpolicy/auth';
   
   Request.post(opts).pipe(res);
 });
