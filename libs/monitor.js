@@ -56,6 +56,7 @@ function initRoutes(cb) {
 
   //app routes
   app.get(/\/$|\/admin$/, require('../server/routes/index'));
+  app.use("/box/srv/1.1/admin/authpolicy/auth", require("../server/routes/auth"));
   
   if(process.env.AUTH_POLICY){
     //app.use(mbaasExpress.fhauth({ cache: true, expire: 60 * 60 }));
