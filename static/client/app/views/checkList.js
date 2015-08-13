@@ -6,6 +6,7 @@
     },
     events: {
       "click button#checkUrlBtn": "genCheckUrl",
+      "click input#checkAll": "selectAllChecks",
       "keyup input#filterText": "filterChecks"
     },
     filterChecks: function filterChecks(){
@@ -15,12 +16,17 @@
       var col = this.getFilteredChecks(filter);
       col.forEach(this.addRowView.bind(this));
     },
+    selectAllChecks: function(e) {
+      var eles = this.$el.find("input[type=checkbox]");
+      eles.each(function() { //loop through each checkbox
+        this.checked = $(e.target).is(":checked"); //select all checkboxes with class "checkbox1"
+      });
+    },
     genCheckUrl: function() {
       var eles = this.$el.find("input[type=checkbox]:checked");
       var ids = [];
       for (var i = 0; i < eles.length; i++) {
-        var data = eles.data();
-        var id = data.id;
+        var id = $(eles[i]).data('id');
         if (id) {
           ids.push(id);
         }
