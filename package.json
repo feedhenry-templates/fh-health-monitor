@@ -2,7 +2,8 @@
   "name": "FeedHenryHealthMonitoring",
   "version": "0.1.0",
   "scripts": {
-    "test": "grunt jshint"
+    "test": "grunt jshint",
+    "start": "node application.js"
   },
   "dependencies": {
     "async": "0.9.0",
