@@ -11,7 +11,7 @@
     "cors": "2.2.0",
     "ejs": "*",
     "express": "4.0.0",
-    "fh-mbaas-api": "5.9.0",
+    "fh-mbaas-api": "5.9.1",
     "mongoose": "3.8.15",
     "optval": "1.0.1",
     "request": "2.40.0",
