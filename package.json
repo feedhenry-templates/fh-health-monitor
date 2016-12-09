@@ -37,5 +37,5 @@
     "time-grunt": "~0.3.1",
     "turbo-test-runner": "0.3.3"
   },
-  "license": "mit"
+  "license": "Apache-2.0"
 }
