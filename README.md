@@ -80,6 +80,6 @@ start the node application with local env vars
 
 ## Env vars 
 
-* FH_MONGODB_CONN_URL: mongodb connection string. used by mongo db driver to connec to a valid mongodb instance 
-* HTTP(S)
+* `FH_MONGODB_CONN_URL`: mongodb connection string. used by mongo db driver to connec to a valid mongodb instance 
+* `HTTP(S)`
 * `FH_PORT` or `VCAP_APP_PORT`: Options to override the default port (8001).
