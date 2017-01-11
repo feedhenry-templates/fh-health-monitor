@@ -1341,7 +1341,7 @@ app.tmpl=(function(module){
         url+=$.param(obj);
         window.location=url;
       }catch(e){
-        app.msg.alert("Invalid query string. Check MongoDb query reference.");
+        app.msg.alert("Invalid MongoDB query filter parameter.  Query Example: {'isSuccessful' : false )}");
       }
     }
   });
