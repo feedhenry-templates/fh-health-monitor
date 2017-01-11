@@ -1341,7 +1341,7 @@ app.tmpl=(function(module){
         url+=$.param(obj);
         window.location=url;
       }catch(e){
-        app.msg.alert("Invalid query string. Check MongoDb query reference.");
+        app.msg.alert("Invalid MongoDB query filter parameter.  Query Example: {'isSuccessful' : false )}");
       }
     }
   });
@@ -1565,7 +1565,7 @@ app.tmpl=(function(module){
 <td> <%= typeof (failReason)!="undefined"?failReason:"N/A" %> </td>
 </script>
 <script type="text/template" id="tmpl_runlist"><div class="page">
-  <h3><small><a href="#">Home</a></small>  Result Log: <%= checkName %><small> Query: <input id="queryStr" placeholder="Mongodb Query String" style="width:600px"/><button type="button" id="queryBtn">Go</button></small></h3>
+  <h3><small><a href="#">Home</a></small>  Result Log: <%= checkName %><small> Query: <input id="queryStr" placeholder="MongoDB Query Filter Parameter" style="width:600px"/><button type="button" id="queryBtn">Go</button></small></h3>
   <table id="run_list" class="table table-striped">
     <tr>
       <th></th>
