@@ -31,6 +31,12 @@ Until such time as this is complete, the health monitoring service will only dis
 ## Local Development
 For local development, the default value for the MongoDB connection string is defined in the Gruntfile.js as `mongodb://127.0.0.1/FH_LOCAL`. This makes use of the standard MongoDB used by $fh.db(). It requires that MongoDB is installed locally and that the FH_LOCAL database is available.
 
+### To Run
+
+* $npm install -g grunt-cli
+* $npm install
+* $grunt serve
+* Go to : `http://127.0.0.1:8001/`
 
 ## Grunt Tasks 
 
@@ -48,5 +54,7 @@ start the node application with local env vars
 
 ## Env vars 
 
-* FH_MONGODB_CONN_URL: mongodb connection string. used by mongo db driver to connec to a valid mongodb instance 
-* HTTP(S)
+* `FH_MONGODB_CONN_URL`: mongodb connection string. used by mongo db driver to connec to a valid mongodb instance 
+* `HTTP(S)`
+* `FH_PORT` or `VCAP_APP_PORT`: Options to override the default port (8001).
+
