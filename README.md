@@ -27,10 +27,42 @@ This process must be completed for each environment that the service is to be de
 
 Until such time as this is complete, the health monitoring service will only display the above instructions. Once complete the service can be used to monitor back end systems.
 
+## To add remote-end-points
+
+This feature is only available at `/admin`.
+
+To create a new check the 'add new' will then be enabled. Click on 'Add new' and then enter the following data:
+
+* Check Name: A name for your own reference
+* Description: A description for your own reference
+* Interval: How many minutes to wait between checks
+* Timeout: How long to allow the service to respond, before considering it disconnected
+* Record Rotation: How many days to store our logs of the responsiveness of the host
+* Check Type: If the service is a website choose 'http(s)' otherwise choose 'TCP'
+
+### TCP Options
+
+* Host: The host to connect to.
+* Port: The port to connect to.
+
+### HTTP(s) Options
+
+* Url: The URL of the website to connect to (e.g. http://feedhenry.com or https://feedhenry.com)
+* Method: GET or POST, pick whichever your application is expecting, if you're unsure, use GET
+* Send Body: This is not required, but in a POST request you can specify the POST data to send
+* Response Regexp Check: This is not required, you can enter a regex in here to verify the response is as expected.
+
+For more information about how to use this service go to Documentation page `/#documentation`. 
 
 ## Local Development
 For local development, the default value for the MongoDB connection string is defined in the Gruntfile.js as `mongodb://127.0.0.1/FH_LOCAL`. This makes use of the standard MongoDB used by $fh.db(). It requires that MongoDB is installed locally and that the FH_LOCAL database is available.
 
+### To Run
+
+* $npm install -g grunt-cli
+* $npm install
+* $grunt serve
+* Go to : `http://127.0.0.1:8001/`
 
 ## Grunt Tasks 
 
@@ -48,5 +80,6 @@ start the node application with local env vars
 
 ## Env vars 
 
-* FH_MONGODB_CONN_URL: mongodb connection string. used by mongo db driver to connec to a valid mongodb instance 
-* HTTP(S)
+* `FH_MONGODB_CONN_URL`: mongodb connection string. used by mongo db driver to connec to a valid mongodb instance 
+* `HTTP(S)`
+* `FH_PORT` or `VCAP_APP_PORT`: Options to override the default port (8001).
