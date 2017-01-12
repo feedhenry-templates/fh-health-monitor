@@ -1,5 +1,12 @@
 <div class="page">
-  <h3><small><a href="#">Home</a></small>  Result Log: <%= checkName %><small> Query: <input id="queryStr" placeholder="Mongodb Query String" style="width:600px"/><button type="button" id="queryBtn">Go</button></small></h3>
+  <table id="label" class="table table-striped">
+    <tr>
+      <th><a href="#">Home</a></th>
+      <th> Result Log: <%= checkName %></th>
+      <th>Query: <input id="queryStr" placeholder="MongoDB Query Filter Parameter" style="width:80%"/></th>
+      <th><button type="button" id="queryBtn">Go</button></th>
+    </tr>
+  </table>
   <table id="run_list" class="table table-striped">
     <tr>
       <th></th>
