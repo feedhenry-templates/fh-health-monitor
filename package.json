@@ -14,7 +14,7 @@
     "fh-mbaas-api": "6.1.3",
     "mongoose": "3.8.15",
     "optval": "1.0.1",
-    "request": "2.40.0",
+    "request": "2.79.0",
     "underscore": "1.7.0",
     "winston": "0.7.3",
     "nodemailer": "1.3.0"
