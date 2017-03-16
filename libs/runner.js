@@ -11,7 +11,7 @@ function runCheck(checkId,cb){
     env:process.env
   });
   c.on("exit",function(code){
-    if (code !=0){
+    if (code !== 0){
       cb("Check running returns with exit code:"+code);
     }else{
       cb(null);

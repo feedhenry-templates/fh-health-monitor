@@ -54,7 +54,6 @@ function afterRun(check,runInst,cb) {
   });
 }
 
-
 function failCheck() {
   //TODO add notification
 }
@@ -76,7 +75,7 @@ function bootstrap(checkId,cb) {
         log.error(err);
         cb(1);
       } else {
-        function _afterRunCb(err) {
+        var _afterRunCb = function(err) {
 
           if (err) {
             log.error("After run failed.");

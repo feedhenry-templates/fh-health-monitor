@@ -31,17 +31,17 @@
           ids.push(id);
         }
       }
-      if (ids.length == 0) {
+      if (ids.length === 0) {
         alert("Please tick at least one monitor item.");
         return;
       }
       var qStr="?";
-      for (var i=0;i<ids.length;i++){
-        qStr+="checkId[]="+ids[i]+"&";
+      for (var item = 0; item < ids.length; item++){
+        qStr+="checkId[]="+ids[item]+"&";
       }
       var url="/api/summary"+qStr;
       var absUrl=qualifyURL(url);
-      prompt("Your monitor summary url",absUrl);
+      prompt("Your monitor summary url",absUrl);  // jshint ignore:line
 
     },
     render: function() {
@@ -77,7 +77,7 @@
     },
     getFilteredChecks: function getFilteredChecks(filter) {
       var col = this.getCol();
-      rets = [];
+      var rets = [];
       col.forEach(function(check){
         if( check.attributes.name.indexOf(filter) !== -1 || check.attributes.description.indexOf(filter) !== -1){
           rets.push(check);
@@ -91,7 +91,7 @@
   });
 
   function qualifyURL(url) {
-    var element = document.createElement('span');
+    var element = document.createElement('span');  // jshint ignore:line
     element.innerHTML = '<a href="' + url+ '">&nbsp;</a>';
     return element.firstChild.href;
   }
