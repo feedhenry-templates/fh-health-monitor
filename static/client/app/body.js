@@ -3,7 +3,7 @@ app.body=(function(module){
    var curView=null;
 
    function change(view){
-     if (curView ==view){
+     if (curView === view){
        return;
      }
      var lastView=curView;

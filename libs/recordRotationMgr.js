@@ -26,7 +26,7 @@ function init(cb) {
 function onTimer() {
   var now = new Date().getTime();
   if (!lastRun || (now - lastRun) > checkPeriod) {
-    if (rotationRunning == false) {
+    if (rotationRunning === false) {
       rotationRunning = true;
       rotate(function(err) {
         if (err) {

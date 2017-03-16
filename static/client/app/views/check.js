@@ -71,7 +71,7 @@
       "click .check_run": "onClickRun"
     },
     onRemove: function() {
-      var res = confirm("Are you sure to remove this item? It cannot be undone.")
+      var res = confirm("Are you sure to remove this item? It cannot be undone.")  // jshint ignore:line
       if (res) {
         this.model.destroy();
       }

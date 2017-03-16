@@ -26,7 +26,7 @@ var app = (function (module) {
     _.each(tags, function(item) {
       if ($(item).html().trim().length>0){
         count --;
-        if (count ==0){
+        if (count === 0){
           cb();
         }
         return;
