@@ -1,4 +1,5 @@
 # FeedHenry Health Monitor Service
+[![Dependency Status](https://img.shields.io/david/feedhenry-templates/fh-health-monitor.svg?style=flat-square)](https://david-dm.org/feedhenry-templates/fh-health-monitor)
 
 The FeedHenry Health Monitor service is intended for monitoring back end systems which are accessable to the FeedHenry cloud (via VPN or IP Punchthrough) but may not be exposed publicaly on the Internet.
 
