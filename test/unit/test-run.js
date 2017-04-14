@@ -25,7 +25,7 @@ describe("Running module", function() {
   it("should run http check", function(done) {
     _addMockCheck({
       name: "mock",
-      "type": "http",
+      "type": "tcp",
       "timeout": 30,
       "interval": 5,
       config: {
@@ -56,7 +56,6 @@ describe("Running module", function() {
         done();
       });
     });
-
   });
 })
 

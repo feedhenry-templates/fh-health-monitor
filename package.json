@@ -1,9 +1,11 @@
 {
-  "name": "FeedHenryHealthMonitoring",
-  "version": "0.1.1",
+  "name": "feedhenryhealthmonitoring",
+  "version": "0.1.2",
   "scripts": {
-    "test": "grunt jshint",
-    "start": "node application.js"
+    "start": "node application.js",
+    "serve": "grunt serve",
+    "test": "grunt test",
+    "coverage": "grunt coverage"
   },
   "dependencies": {
     "async": "0.9.0",
@@ -35,7 +37,7 @@
     "should": "2.1.1",
     "supertest": "0.8.2",
     "time-grunt": "~0.3.1",
-    "turbo-test-runner": "0.3.3"
+    "mocha": "3.2.0"
   },
   "license": "Apache-2.0"
 }
