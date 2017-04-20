@@ -65,19 +65,33 @@ For local development, the default value for the MongoDB connection string is de
 * $grunt serve
 * Go to : `http://127.0.0.1:8001/`
 
-## Grunt Tasks 
+## Test
 
 ### build 
-Build client assets into a single index.html
+```
+npm install
+```
 
 ### unit
-Runt unit tests 
-
-### accept 
-Run acceptance tests 
-
-### serve 
-start the node application with local env vars 
+As pre-requisites:
+```
+npm run serve
+mongod
+```
+* run unit test:
+``` 
+npm test
+```
+### test coverage
+As pre-requisites:
+```
+npm run serve
+mongod
+```
+Run unit test:
+``` 
+npm run coverage
+```
 
 ## Env vars 
 
