@@ -113,10 +113,8 @@ module.exports = function(grunt) {
         },
         command: [
           'rm -rf coverage cov-unit',
-          'env NODE_PATH=. ./node_modules/.bin/istanbul cover --dir cov-unit ./node_modules/.bin/_mocha -- -u exports --recursive test/unit/test*.js',
-          './node_modules/.bin/istanbul report',
-          'echo "See html coverage at: `pwd`/coverage/lcov-report/index.html"'
-        ].join('&&')
+          'env NODE_PATH=. ./node_modules/.bin/istanbul cover --dir cov-unit ./node_modules/.bin/_mocha -- -u exports --recursive test/unit/test*.js'
+         ].join('&&')
       }
     },
     open: {
